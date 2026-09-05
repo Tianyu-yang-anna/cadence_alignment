@@ -78,6 +78,11 @@ ROWS = [
      "benchgen_planner_prefix_owt2_pqsh_b2s2d", "_finalS24", 22, 24,
      "= seg:8,9,10:4 的同臂退化（逐比特等价有门禁测试）；24 采样器前向的注册数"),
 
+    ("axis", "2D 天花板 lrseg2:all C16K4（b2s2f，_final2Dv2）",
+     "benchgen_planner_prefix_owt2_pqsh_b2s2f", "_final2Dv2", 22, 1016,
+     "chunk 真条件版的性能上限：11.5× 采样 NFE 与主线 seg:all:4@88 持平略低 —— "
+     "机制有效但不经济，方向关闭"),
+
     # ---- P1 HMAR scale reweighting --------------------------------------
     ("hmar", "★α=0.25 插值全链（sg56a25，_finalSEGA25）",
      "benchgen_planner_prefix_owt2_pqsh_sg56a25", "_finalSEGA25", 22, 88,

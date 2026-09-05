@@ -90,10 +90,20 @@ class WindowCondDataset(Dataset):
         return {"condition_input_ids": w[:c], "input_ids": w[c:]}
 
 
-def build_encoder(kind: str, device, seed: int):
+def build_encoder(kind: str, device, seed: int, ckpt_path: str = ""):
     cfg = T5EncoderConfig.from_pretrained("t5-small", dtype=torch.float32)
     if kind == "pretrained":
         enc = T5Encoder(cfg, pretrained=True)
+    elif kind == "local":
+        # the fair-resource arm: same geometry, weights pretrained on OUR
+        # corpus under OUR side budget (pretrain_t5enc.py)
+        assert ckpt_path, "--encoder local needs --encoder_ckpt"
+        torch.manual_seed(seed)
+        enc = T5Encoder(cfg, pretrained=False)
+        payload = torch.load(ckpt_path, map_location="cpu",
+                             weights_only=False)
+        state = payload["model"] if "model" in payload else payload
+        enc.model.load_state_dict(state)
     else:
         torch.manual_seed(seed)  # reproducible random embedding space
         enc = T5Encoder(cfg, pretrained=False)
@@ -139,8 +149,10 @@ def main():
     ap.add_argument("--data_dir", required=True,
                     help="dir holding train.bin + meta.json (T5-tokenized)")
     ap.add_argument("--run_dir", required=True)
-    ap.add_argument("--encoder", choices=["pretrained", "random"],
+    ap.add_argument("--encoder", choices=["pretrained", "random", "local"],
                     required=True)
+    ap.add_argument("--encoder_ckpt", default="",
+                    help="state-dict path for --encoder local")
     ap.add_argument("--steps", type=int, default=7630)
     ap.add_argument("--global_batch", type=int, default=256)
     ap.add_argument("--seed", type=int, default=0)
@@ -204,9 +216,10 @@ def main():
         max_input_seq_length=SEQ_LEN, distributed=world > 1)
 
     torch.manual_seed(args.seed + rank)
-    enc_cfg, encoder = build_encoder(args.encoder, device, args.seed)
+    enc_cfg, encoder = build_encoder(args.encoder, device, args.seed,
+                                     ckpt_path=args.encoder_ckpt)
 
-    if args.encoder == "random":
+    if args.encoder in ("random", "local"):
         mean, std = measure_latent_stats(encoder, loader, config, device)
         if world > 1:  # rank-0's numbers everywhere, bit-identical
             t = torch.tensor([mean, std], device=device)
@@ -259,13 +272,17 @@ def main():
             return
         inner = state.model.module if hasattr(state.model, "module") \
             else state.model
-        torch.save({"model": inner.state_dict(), "ema": state.ema_params1,
-                    "optimizer": state.optimizer.state_dict(),
-                    "scheduler": state.lr_scheduler.state_dict(),
-                    "step": state.step, "encoder_kind": args.encoder,
-                    "latent_mean": config.latent_mean,
-                    "latent_std": config.latent_std},
-                   run_dir / f"ckpt_{tag}.pt")
+        payload = {"model": inner.state_dict(), "ema": state.ema_params1,
+                   "optimizer": state.optimizer.state_dict(),
+                   "scheduler": state.lr_scheduler.state_dict(),
+                   "step": state.step, "encoder_kind": args.encoder,
+                   "latent_mean": config.latent_mean,
+                   "latent_std": config.latent_std}
+        if args.encoder == "local":
+            # generation must not depend on a second file lying around
+            payload["encoder_state"] = {
+                k: v.cpu() for k, v in encoder.model.state_dict().items()}
+        torch.save(payload, run_dir / f"ckpt_{tag}.pt")
         (run_dir / "latest.txt").write_text(f"ckpt_{tag}.pt\n")
 
     # resume: platform preemption on a multi-hour job must not restart the

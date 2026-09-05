@@ -96,8 +96,12 @@ def main():
 
     from transformers import AutoTokenizer
     tokenizer = AutoTokenizer.from_pretrained("t5-small", use_fast=True)
-    enc_cfg, encoder = build_encoder(payload["encoder_kind"], device,
-                                     seed=int(run_cfg.get("seed", 0)))
+    enc_cfg, encoder = build_encoder(
+        "random" if payload["encoder_kind"] == "local"
+        else payload["encoder_kind"], device,
+        seed=int(run_cfg.get("seed", 0)))
+    if payload["encoder_kind"] == "local":
+        encoder.model.load_state_dict(payload["encoder_state"])
 
     model = ELF_models["ELF-B"](
         text_encoder_dim=enc_cfg.d_model, max_length=SEQ_LEN,
