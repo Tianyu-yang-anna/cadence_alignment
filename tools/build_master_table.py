@@ -96,6 +96,17 @@ ROWS = [
      "benchgen_planner_prefix_owt2_pqsh_sg56ln", "_finalSEGHWLN", 22, 88,
      "主线对照 = _finalSEG（token 加权）"),
 
+    # ---- ELF baseline (external pretrained encoder; footnoted) ----------
+    ("elf", "ELF pre2（预训练 T5 enc + 重标 EMA，ODE64 CFG2）",
+     "benchgen_elf_owt2_t5_pre2", "_finalELFP2", 128, 0,
+     "**外部预训练 encoder**（t5-small 35M，C4 ~1T token）提供嵌入空间——随机 encoder "
+     "消融在 MAUVE 地板，说明流畅性由进口知识贡献；不可与零外部权重的家族并列同读。"
+     "NFE≈128+ backbone 前向（ODE64×CFG 双分支）vs 家族的 22/1024。截断协议与家族一致"),
+    ("elf", "ELF rnd（随机冻结 enc 消融，ODE64 CFG2）",
+     "benchgen_elf_owt2_t5_rnd", "_finalELFRt", 128, 0,
+     "它们论文自己的消融变体；退化（MAUVE 地板），R1 属高频词面重合，"
+     "不可与流畅系统并读"),
+
     # ---- fluent baselines, directly comparable --------------------------
     ("baseline", "BD3-LM 满预算", "benchgen_bd3lm_owt2", "_final", 1024, 0, ""),
     ("baseline", "BD3-LM 限步 256（每块 4 步）",
@@ -125,6 +136,7 @@ ROWS = [
 ]
 
 GROUP_TITLE = {
+    "elf": "ELF baseline（arXiv 2605.10938）——外部预训练 encoder，进表须脚注",
     "cadence": "CADENCE 尝试（按机制递进，全部严格 2B）",
     "axis": "三个尺度内解码轴的单变量对比（同父、同 7630 步、depth 全冻结）",
     "hmar": "P1：HMAR §4.3 尺度重加权",
@@ -137,6 +149,17 @@ GROUP_TITLE = {
 # They are reported separately from test because n=250 MAUVE has a measured
 # bootstrap sd of 3.2-5.3 -- see the caveat printed under each sweep.
 SEL_SWEEPS = [
+    ("纯 2D（lrseg2:all）NFE 阶梯（`b2s2f`，--chunks 32 臂）",
+     "benchgen_planner_prefix_owt2_pqsh_b2s2f",
+     [("C=1 K=4（88，同臂对照=无 chunk 结构）", "_f88"),
+      ("C=2 K=4（168）", "_f168"),
+      ("C=4 K=4（312）", "_f312"),
+      ("C=8 K=4（568，≈512 档）", "_f568"),
+      ("C=16 K=4（1016，≈1024 档）", "_f1016")],
+     "天花板 = C16K4@1016：wiki 21.01 / WS 18.92，对同臂对照两集同向胜出"
+     "（+2.4/+10.6）但阶梯非单调（312 档 WS 36.48 为孤立高点=噪声），且**用 11.5× 的"
+     "采样 NFE 也只追平主线 seg:all:4@88 的 22.89/20.42（噪声内）**。"
+     "test 一枪 _final2Dv2 已按预注册发出。"),
     ("修正后 2D（lrseg2，chunk 真条件）高 NFE 扫描（`b2s2e`）",
      "benchgen_planner_prefix_owt2_pqsh_b2s2e",
      [("seg粗K4 + 2D细C2K2（88）", "_e88"),
@@ -144,7 +167,8 @@ SEL_SWEEPS = [
       ("seg粗K4 + 2D细C4K4（160）", "_e160a"),
       ("seg粗K4 + 2D细C8K2（160）", "_e160b"),
       ("seg粗K4 + 2D细C8K4（256）", "_e256"),
-      ("对照 seg:all:4 同臂（88，细带 OOD——细带只训过 position 约定）", "_esegall")],
+      ("对照 seg:all:4 同臂（88，细带 OOD——细带只训过 position 约定）", "_esegall"),
+      ("分布内对照 lrseg2 C1K4 @细（88）", "_e88b")],
      "C8K2@160 首次在两个 sel 集上同时高于同臂对照（+3.1/+0.8，wiki 仍在噪声带内），"
      "但 NFE 不单调、且 b2s2e 臂本身显著弱于主线臂（同解码 14.17 vs 22.89——混合训练"
      "把细带监督摊薄）。分布内对照 lrseg2 C1K4（_e88b）补测中。"),

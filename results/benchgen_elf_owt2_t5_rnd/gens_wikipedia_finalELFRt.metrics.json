@@ -1,0 +1,12 @@
+{
+  "gen_file": "/tmp/cadence_local/elfgen/gens_wikipedia_finalELFRt.jsonl",
+  "n": 1000,
+  "rouge1": 0.17089187725430227,
+  "rouge2": 0.013476532593922244,
+  "rougeL": 0.09893880223580453,
+  "distinct1": 0.28889380408637233,
+  "distinct2": 0.8374220166142143,
+  "ref_distinct2": 0.6965737767251371,
+  "bertscore_f1": 0.7501147389411926,
+  "mauve": 0.007359111710764188
+}
