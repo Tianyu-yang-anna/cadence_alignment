@@ -1,0 +1,5 @@
+# git-archive snapshots (sgcli job submission) must not carry the generated
+# text corpora: the tracked gens files make the archive ~293MB, which times
+# out on slow uplinks (measured 2026-09-06) and is never needed by jobs.
+# export-ignore drops them from `git archive` while keeping them tracked.
+results/*/gens_*.jsonl export-ignore
