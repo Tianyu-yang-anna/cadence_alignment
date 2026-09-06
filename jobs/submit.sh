@@ -8,6 +8,10 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 STAGE=${1:?stage required (smoke|train|eval)}
+# a submitted job whose entry script does not exist dies on the node in ~50s
+# with a bare INTERNAL_ERROR and zero logs (measured: cadence-elfenc-ours,
+# 2026-09-05) — fail HERE instead
+[ -f "jobs/${STAGE}_entry.sh" ] || { echo "no jobs/${STAGE}_entry.sh"; exit 1; }
 SUFFIX=${2:-}
 TIMEOUT=${3:-480}
 GPU=${4:-1xh100}
