@@ -186,6 +186,33 @@ SEL_SWEEPS = [
      "C8K2@160 首次在两个 sel 集上同时高于同臂对照（+3.1/+0.8，wiki 仍在噪声带内），"
      "但 NFE 不单调、且 b2s2e 臂本身显著弱于主线臂（同解码 14.17 vs 22.89——混合训练"
      "把细带监督摊薄）。分布内对照 lrseg2 C1K4（_e88b）补测中。"),
+] + [
+    (f"多掩码 2D 臂 M={m}（`b2s2eM{m}`，与 `b2s2e` 同格同 tag，M 是唯一训练变量）",
+     f"benchgen_planner_prefix_owt2_pqsh_b2s2eM{m}",
+     [("seg粗K4 + 2D细C2K2（88）", "_e88"),
+      ("seg粗K4 + 2D细C4K2（112）", "_e112"),
+      ("seg粗K4 + 2D细C4K4（160）", "_e160a"),
+      ("seg粗K4 + 2D细C8K2（160）", "_e160b"),
+      ("seg粗K4 + 2D细C8K4（256）", "_e256"),
+      ("分布内对照 lrseg2 C1K4（88）", "_e88b"),
+      ("对照 seg:all:4 同臂（88）", "_esegall")],
+     "M 阶梯（1/2/4/8/16）结论见调优波报告终章十三 §7：R1/R2 在 M=8 峰值"
+     "（14/14 格 M8>M1）、M=16 回落；注册点 = M8 C2K2@88（wiki MAUVE 22.75，"
+     "88 NFE 逼平主线 22.89），test 一枪 _finalM8。")
+    for m in (2, 4, 8, 16)
+] + [
+    ("多掩码纯段轴（`b2sgM4`/`b2sgM16`，seg:all:4，对 `b2sg` 单变量 = M）",
+     "benchgen_planner_prefix_owt2_pqsh_b2sgM4",
+     [("M=4 seg:all:4（88）", "_segall4")],
+     "M=1 基准（b2sg）= wiki 22.33/2.33/22.89、WS 28.62/3.65/20.42；"
+     "M=16（b2sgM16/_segall4）= wiki 22.58/2.30/12.42、WS 28.72/3.68/21.04。"
+     "R1/R2 全平、MAUVE 两集不同向 → 纯段轴主线对多掩码**无可测收益**"
+     "（监督已饱和；与 2D 臂的正响应构成机制对照：多掩码=恢复被摊薄的监督效率，"
+     "非普适增益）。"),
+    ("多掩码纯段轴 M=16（`b2sgM16`）",
+     "benchgen_planner_prefix_owt2_pqsh_b2sgM16",
+     [("M=16 seg:all:4（88）", "_segall4")],
+     "见上一表 caveat。"),
     ("ELF（arXiv 2605.10938）sel 扫描 —— 原始权重（EMA 校准 bug 修正后）",
      "benchgen_elf_owt2_t5_pre",
      [("pre：ODE64 CFG2（未截断）", "_rs64c2"),

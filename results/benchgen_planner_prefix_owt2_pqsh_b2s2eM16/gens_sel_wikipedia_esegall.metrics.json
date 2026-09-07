@@ -1,0 +1,12 @@
+{
+  "gen_file": "/tmp/cadence_local/benchgen/gens_sel_wikipedia_esegall.jsonl",
+  "n": 250,
+  "rouge1": 0.2194845726944525,
+  "rouge2": 0.022898121739570558,
+  "rougeL": 0.11679053855766018,
+  "distinct1": 0.3473206355472219,
+  "distinct2": 0.8117623723098284,
+  "ref_distinct2": 0.7602697609838341,
+  "bertscore_f1": 0.7781601548194885,
+  "mauve": 0.15754518729297
+}
