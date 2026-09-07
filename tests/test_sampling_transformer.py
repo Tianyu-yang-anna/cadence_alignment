@@ -1064,3 +1064,40 @@ def test_lrseg_reveal_fixed_grid_clamps_like_the_decode(C, l, expect):
         rows = sup[b].any(-1).nonzero().flatten()
         if len(rows):
             assert int(rows[-1] - rows[0]) < width, "supervised span too wide"
+
+
+# ------------------------------------ T12 multi-mask (multi-state) training
+
+@requires_planner_sampler
+def test_multi_state_forward_matches_single_state_calls_bitwise():
+    """sampler_states=[...] must return, per state, EXACTLY what the legacy
+    single-state call returns for the same masks — M=1 is the old path and
+    every state in an M>1 batch is its own independent readout of the SAME
+    trunk hidden. Any drift here silently changes the training objective."""
+    planner = activate_planner(make_planner(sampler=True))
+    torch.manual_seed(5)
+    B, L, S = 2, sum(SCALES), planner.segments
+    codes = torch.randint(0, planner.seg_vocab, (B, L, S))
+    pe, pm = rand_prefix(B, n_pad=4)
+    n = len(SCALES)
+    coarse, fine = list(range(n - 2)), [n - 2, n - 1]
+    planner.eval()
+    states = []
+    for j in range(3):
+        m_seg = torch.rand(B, L, S) < 0.3 + 0.1 * j
+        m_pos = torch.rand(B, L, S) < 0.25
+        states.append((m_seg, "segment", coarse, m_pos, "position", fine))
+    # a pure single-band state too (the sampler_seg shape)
+    m_only = torch.rand(B, L, S) < 0.4
+    states.append((m_only, "segment", list(range(n)), None, "position", None))
+    kw = dict(prefix_mask=pm, cond_drop=torch.zeros(B, dtype=torch.bool),
+              sampler_codes=codes)
+    with torch.no_grad():
+        multi = planner(codes, pe, sampler_states=states, **kw)
+        assert isinstance(multi, list) and len(multi) == 4
+        for got, st in zip(multi, states):
+            ref = planner(codes, pe, sampler_mask=st[0], sampler_mode=st[1],
+                          sampler_scales=st[2], sampler_mask2=st[3],
+                          sampler_mode2=st[4], sampler_scales2=st[5], **kw)
+            assert torch.equal(got, ref), "a state diverged from its own " \
+                "single-state call"

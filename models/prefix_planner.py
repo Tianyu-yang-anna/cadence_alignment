@@ -525,7 +525,8 @@ class PrefixVARPlanner(nn.Module):
                 sampler_scales: list[int] | None = None,
                 sampler_mask2: torch.Tensor | None = None,
                 sampler_mode2: str = "position",
-                sampler_scales2: list[int] | None = None) -> torch.Tensor:
+                sampler_scales2: list[int] | None = None,
+                sampler_states: list | None = None):
         """Teacher-forced logits [B, sum(scales), S, N].
 
         codes_flat: [B, sum(scales), S] ground-truth PQ codes;
@@ -562,30 +563,35 @@ class PrefixVARPlanner(nn.Module):
         if self.sampler is None:
             assert sampler_mask is None, "planner built without a sampler"
             return self._head_logits_depth(h[:, P:], codes_flat)
-        logits = self._sampler_ladder_logits(h[:, P:], codes_flat,
-                                             sampler_codes, sampler_mask,
-                                             sampler_mode, sampler_scales)
-        if sampler_mask2 is not None:
-            # SECOND sampler group on the SAME trunk hidden: a mixed arm can
-            # supervise the segment convention on one scale band and the
-            # position convention on another WITHOUT blending the two input
-            # conventions inside one pass (the sampler_mix lesson). The
-            # second pass's logits replace the first's on ITS scale blocks;
-            # everywhere else pass 1 stands. Costs one extra 2L x 384 sampler
-            # forward — the 12L trunk is not recomputed.
-            logits2 = self._sampler_ladder_logits(h[:, P:], codes_flat,
-                                                  sampler_codes, sampler_mask2,
-                                                  sampler_mode2,
-                                                  sampler_scales2)
-            starts = [0]
-            for l in self.scales:
-                starts.append(starts[-1] + l)
-            out = logits.clone()
-            for k in (sampler_scales2 or []):
-                out[:, starts[k]:starts[k + 1]] = \
-                    logits2[:, starts[k]:starts[k + 1]]
-            logits = out
-        return logits
+        def one_state(m1, md1, sc1, m2, md2, sc2):
+            """One valid decoding state's readout over the SHARED trunk
+            hidden: pass 1 on its band, optional pass 2 spliced onto its own
+            scale blocks (the two-band lrseg2 pattern; the sampler_mix lesson
+            keeps the conventions in separate passes)."""
+            lo = self._sampler_ladder_logits(h[:, P:], codes_flat,
+                                             sampler_codes, m1, md1, sc1)
+            if m2 is not None:
+                lo2 = self._sampler_ladder_logits(h[:, P:], codes_flat,
+                                                  sampler_codes, m2, md2, sc2)
+                starts = [0]
+                for l in self.scales:
+                    starts.append(starts[-1] + l)
+                out = lo.clone()
+                for k in (sc2 or []):
+                    out[:, starts[k]:starts[k + 1]] = \
+                        lo2[:, starts[k]:starts[k + 1]]
+                lo = out
+            return lo
+
+        if sampler_states is not None:
+            # MULTI-MASK training: M independent valid decoding states read
+            # out over ONE trunk forward (the expensive blueprint), each with
+            # its own reveal pattern and supervision — M x the supervision
+            # per trunk computation at only the shallow sampler's marginal
+            # cost. Each entry: (mask, mode, scales, mask2, mode2, scales2).
+            return [one_state(*st) for st in sampler_states]
+        return one_state(sampler_mask, sampler_mode, sampler_scales,
+                         sampler_mask2, sampler_mode2, sampler_scales2)
 
     # ------------------------------------------------------------ inference
 

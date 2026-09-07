@@ -160,6 +160,14 @@ def main():
                          "grid's divisors) "
                          "(inference chunk counts that divide this grid stay "
                          "train-consistent)")
+    ap.add_argument("--sampler_mask_samples", type=int, default=1,
+                    help="M: independent valid decoding states sampled per "
+                         "trunk forward (multi-mask training). The expensive "
+                         "blueprint is computed once; the shallow sampler "
+                         "reads it out M times, each with its own reveal "
+                         "pattern and supervision, and the M losses average. "
+                         "M=1 is exactly the legacy path. Supported for "
+                         "sampler_seg and sampler_lrseg2")
     ap.add_argument("--chunk_grid", default="",
                     help="comma list FIXING the training chunk counts for "
                          "sampler_lrseg/lrseg2 (e.g. '8') instead of the "
@@ -276,6 +284,9 @@ def main():
                           if x != "")
     chunk_grid = ([int(x) for x in args.chunk_grid.split(",") if x]
                   if args.chunk_grid else None)
+    if args.sampler_mask_samples > 1:
+        assert args.mask_mode in ("sampler_seg", "sampler_lrseg2"), \
+            "--sampler_mask_samples > 1 supports sampler_seg / sampler_lrseg2"
     if args.mask_mode in ("sampler_seg2d", "sampler_lrseg2"):
         assert lrseg_scale_ids <= set(mask_scale_ids), \
             "--lrseg_scales must be a subset of --mask_scales"
@@ -347,6 +358,57 @@ def main():
             pmask = batch["prompt_mask"].to(device, non_blocking=True)
             B = codes.shape[0]
             prefix_e = encode_prefix(tokenizer, prompt, pmask, ac)
+
+            if args.sampler_mask_samples > 1:
+                # MULTI-MASK TRAINING (2026-09-07, mentor direction): one
+                # trunk forward = one blueprint; sample M independent VALID
+                # decoding states over it and average their losses. The mask
+                # distributions are UNCHANGED — the only change is M states
+                # per blueprint instead of one, so every state remains one
+                # the inference decoder can actually encounter.
+                def build_state():
+                    w = torch.full((B, L_total, S), args.retain_weight,
+                                   device=device)
+                    if args.mask_mode == "sampler_seg":
+                        n_rev = torch.randint(0, S, (B, L_total, 1),
+                                              device=device)
+                        sm = torch.rand(B, L_total, S,
+                                        device=device).argsort(-1) < n_rev
+                        return (sm, "segment", mask_scale_ids,
+                                None, "position", None, (~sm).float())
+                    st = build_lrseg2_masks(
+                        B, L_total, S, starts, scales, mask_scale_ids,
+                        lrseg_scale_ids, args.chunks, w, device,
+                        grid_override=chunk_grid)
+                    return (*st, w)
+                states = [build_state()
+                          for _ in range(args.sampler_mask_samples)]
+                sync_ctx = (model.no_sync() if ddp and m < n_accum - 1
+                            else nullcontext())
+                with sync_ctx:
+                    with ac():
+                        logits_list = model(
+                            codes, prefix_e, prefix_mask=pmask,
+                            visible_codes=None, visible_mask=None,
+                            sampler_codes=codes,
+                            sampler_states=[st[:6] for st in states])
+                        losses, sup_slots = [], 0
+                        for lo, st in zip(logits_list, states):
+                            w = st[6]
+                            N = lo.shape[-1]
+                            ce = F.cross_entropy(
+                                lo.float().reshape(-1, N), codes.reshape(-1),
+                                reduction="none").reshape(B, L_total, S)
+                            losses.append(
+                                ((ce * w).sum(dim=(1, 2))
+                                 / w.sum(dim=(1, 2)).clamp_min(1.0)).mean())
+                            sup_slots += int((w > 0).sum())
+                        loss = torch.stack(losses).mean()
+                    (loss / n_accum).backward()
+                win["loss"] += float(loss)
+                win["micro"] += 1
+                win["sup_slots"] = win.get("sup_slots", 0) + sup_slots
+                continue
 
             # per-sample refine target scale + mode-specific reveal pattern
             pick = torch.randint(0, len(mask_scale_ids), (B,), device=device)
@@ -542,7 +604,12 @@ def main():
         if is_main and step % cfg.train.log_interval == 0:
             n = max(win["micro"], 1)
             dt = time.time() - t_last
+            peak_gb = (torch.cuda.max_memory_allocated() / 1e9
+                       if torch.cuda.is_available() else 0.0)
             metrics_log.log({"step": step, "lr": scheduler.get_last_lr()[0],
+                             "mask_samples": args.sampler_mask_samples,
+                             "sup_slots": win.get("sup_slots", 0) / n,
+                             "peak_mem_gb": round(peak_gb, 2),
                              "loss": win["loss"] / n,
                              "gate": float(torch.tanh(raw.visible_gate)),
                              "grad_norm": float(grad_norm),
