@@ -104,13 +104,22 @@ ROWS = [
     # ---- ELF baseline (external pretrained encoder; footnoted) ----------
     ("elf", "ELF pre2（预训练 T5 enc + 重标 EMA，ODE64 CFG2）",
      "benchgen_elf_owt2_t5_pre2", "_finalELFP2", 128, 0,
-     "**外部预训练 encoder**（t5-small 35M，C4 ~1T token）提供嵌入空间——随机 encoder "
-     "消融在 MAUVE 地板，说明流畅性由进口知识贡献；不可与零外部权重的家族并列同读。"
-     "NFE≈128+ backbone 前向（ODE64×CFG 双分支）vs 家族的 22/1024。截断协议与家族一致"),
+     "**外部预训练 encoder**（t5-small 35M，C4 ~1T token）提供嵌入空间。"
+     "~~流畅性由进口知识贡献~~（2026-09-07 由公平臂证伪：自语料 39.3B encoder "
+     "打平甚至反超，见公平臂行——有效成分是『预训练上下文嵌入空间作基底』本身，"
+     "不是外部数据）。NFE≈128+ backbone 前向（ODE64×CFG 双分支）vs 家族的 "
+     "22/1024。截断协议与家族一致"),
     ("elf", "ELF rnd（随机冻结 enc 消融，ODE64 CFG2）",
      "benchgen_elf_owt2_t5_rnd", "_finalELFRt", 128, 0,
      "它们论文自己的消融变体；退化（MAUVE 地板），R1 属高频词面重合，"
      "不可与流畅系统并读"),
+    ("elf", "ELF 公平臂（39.3B 自语料 enc，ODE64 CFG2）",
+     "benchgen_elf_owt2_t5_ours", "_finalELFOURS", 128, 0,
+     "三点归因中间点：encoder 换成我们自己语料上按 tokenizer 同额侧预算"
+     "（150k×256×1024=39.3B token）预训的同几何 T5EncoderModel（MLM，见 "
+     "pretrain_t5enc.py）——两阶段预算形状与家族完全对称。结果与 pre2 统计"
+     "不可分（wiki/WS MAUVE 反而更高）：ELF 的领先不是外部数据的伪影。"
+     "遗留不对称仅 NFE（≈128 vs 22）与 T5 词表"),
 
     # ---- fluent baselines, directly comparable --------------------------
     ("baseline", "BD3-LM 满预算", "benchgen_bd3lm_owt2", "_final", 1024, 0, ""),
@@ -281,7 +290,7 @@ def main():
            "除标注外全部严格 2B（7630×256×1024 梯度 token）、同数据、同 GPT-2 BPE、",
            "同 12L×768 主干。NFE = 每生成 1024 token 的 backbone 前向次数（CFG 双分支计入）。",
            ""]
-    for group in ["cadence", "axis", "hmar", "baseline", "degenerate"]:
+    for group in ["cadence", "axis", "hmar", "elf", "baseline", "degenerate"]:
         rows = [r for r in ROWS if r[0] == group]
         if not any((r[1], b) in idx for r in rows for b in BENCHES):
             continue

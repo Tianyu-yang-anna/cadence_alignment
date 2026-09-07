@@ -61,6 +61,18 @@
 - **波A lognormal（hw76ln）**：非主线
 - **波B lognormal 全链（sg56ln）**：主线对照 = _finalSEG（token 加权）
 
+## ELF baseline（arXiv 2605.10938）——外部预训练 encoder，进表须脚注
+
+| 配置 | NFE | Wikipedia | WikiSource | TinyStories | 1BW |
+|---|---|---|---|---|---|
+| ELF pre2（预训练 T5 enc + 重标 EMA，ODE64 CFG2） | 128 | 28.35/5.06/26.89 | 31.28/5.25/13.21 | 34.49/6.02/0.73 | 11.53/0.59/0.53 |
+| ELF rnd（随机冻结 enc 消融，ODE64 CFG2） | 128 | 17.09/1.35/0.74 | 23.48/1.90/0.62 | 24.07/1.67/0.53 | 9.36/0.31/0.45 |
+| ELF 公平臂（39.3B 自语料 enc，ODE64 CFG2） | 128 | 28.99/5.25/30.75 | 32.14/5.34/25.25 | 33.76/6.25/0.63 | 10.80/0.45/0.61 |
+
+- **ELF pre2（预训练 T5 enc + 重标 EMA，ODE64 CFG2）**：**外部预训练 encoder**（t5-small 35M，C4 ~1T token）提供嵌入空间。~~流畅性由进口知识贡献~~（2026-09-07 由公平臂证伪：自语料 39.3B encoder 打平甚至反超，见公平臂行——有效成分是『预训练上下文嵌入空间作基底』本身，不是外部数据）。NFE≈128+ backbone 前向（ODE64×CFG 双分支）vs 家族的 22/1024。截断协议与家族一致
+- **ELF rnd（随机冻结 enc 消融，ODE64 CFG2）**：它们论文自己的消融变体；退化（MAUVE 地板），R1 属高频词面重合，不可与流畅系统并读
+- **ELF 公平臂（39.3B 自语料 enc，ODE64 CFG2）**：三点归因中间点：encoder 换成我们自己语料上按 tokenizer 同额侧预算（150k×256×1024=39.3B token）预训的同几何 T5EncoderModel（MLM，见 pretrain_t5enc.py）——两阶段预算形状与家族完全对称。结果与 pre2 统计不可分（wiki/WS MAUVE 反而更高）：ELF 的领先不是外部数据的伪影。遗留不对称仅 NFE（≈128 vs 22）与 T5 词表
+
 ## 流畅 baseline（可直接对比）
 
 | 配置 | NFE | Wikipedia | WikiSource | TinyStories | 1BW |
