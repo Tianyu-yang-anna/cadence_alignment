@@ -24,6 +24,19 @@ uv pip install --python "$PY" -q "muon-optimizer>=0.1.0" \
 ensure_data || { log "ABORT: data ($DATA_NAME bins missing on Volume?)"; exit 1; }
 DATA_DIR="$LOCAL_ROOT/data/$DATA_NAME"
 
+# ENC_FULL: optional locally-pretrained encoder run (checkpoints/<ENC_FULL>)
+# for --encoder local; restored to a node-local path and passed via
+# --encoder_ckpt appended to EXTRA_ARGS
+if [ -n "${ENC_FULL:-}" ]; then
+  EVCK="$VOL/checkpoints/$ENC_FULL"
+  elatest=$(tr -d '[:space:]' < "$EVCK/latest.txt" 2>/dev/null || echo "")
+  [ -n "$elatest" ] && [ -f "$EVCK/$elatest" ] || { log "no encoder ckpt in $EVCK"; push_log; exit 1; }
+  mkdir -p "$LOCAL_ROOT/runs/$ENC_FULL"
+  cp -f "$EVCK/$elatest" "$LOCAL_ROOT/runs/$ENC_FULL/$elatest"
+  EXTRA_ARGS="$EXTRA_ARGS --encoder_ckpt $LOCAL_ROOT/runs/$ENC_FULL/$elatest"
+  log "encoder ckpt restored: $ENC_FULL/$elatest"
+fi
+
 FULL_RUN_NAME="elf_${DATA_NAME}_$RUN_NAME"
 RUN_DIR="$LOCAL_ROOT/runs/$FULL_RUN_NAME"
 VCK="$VOL/checkpoints/$FULL_RUN_NAME"
