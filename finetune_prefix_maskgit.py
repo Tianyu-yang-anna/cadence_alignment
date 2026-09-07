@@ -50,7 +50,7 @@ from utils.config import load_config, resolved_out_dir, save_config
 from utils.logging import JsonlLogger, log_line
 
 
-def lrseg_reveal(B, l, S, chunks_arg, device):
+def lrseg_reveal(B, l, S, chunks_arg, device, grid_override=None):
     """The 2D reveal pattern the lrseg decode visits at one scale: chunks left
     of the current one fully committed (all S segments), a per-position random
     SEGMENT subset committed inside it, chunks to the right fully masked.
@@ -62,8 +62,18 @@ def lrseg_reveal(B, l, S, chunks_arg, device):
     # per-scale grid: chunk counts that divide the arg grid AND fit the
     # scale (short scales like q1/q2 simply train fewer chunk counts; with
     # power-of-two ladders c <= l always divides l)
-    grid = [c for c in (1, 2, 4, 8, 16, 32)
-            if c <= chunks_arg and chunks_arg % c == 0 and c <= l]
+    if grid_override:
+        # fixed-C training (anti-dilution arms): clamp to the scale length
+        # exactly as the decode's min(C, l) does, so a C=16 grid on a
+        # 4-position scale trains the C=4 pattern the decode actually runs.
+        # K stays free ON PURPOSE: the uniform per-position segment reveal
+        # (n_rev ~ U{0..S-1}) already covers every K schedule's states
+        # exactly, so fixing K=4 would be a no-op and fixing K<4 would only
+        # concentrate the segment axis 2x while making other K values OOD.
+        grid = sorted({min(c, l) for c in grid_override})
+    else:
+        grid = [c for c in (1, 2, 4, 8, 16, 32)
+                if c <= chunks_arg and chunks_arg % c == 0 and c <= l]
     for c_ in grid:
         assert l % c_ == 0, f"scale l={l} not divisible by chunk count {c_}"
     Cs = torch.tensor(grid, device=device)[
@@ -83,7 +93,8 @@ def lrseg_reveal(B, l, S, chunks_arg, device):
 
 
 def build_lrseg2_masks(B, L_total, S, starts, scales, mask_scale_ids,
-                       lrseg_scale_ids, chunks_arg, weights, device):
+                       lrseg_scale_ids, chunks_arg, weights, device,
+                       grid_override=None):
     """sampler_lrseg2's two-pass reveal builder, extracted so BOTH shapes —
     mixed band and all-lrseg (empty segment band) — are exercised by unit
     tests instead of by a cluster launch (two launches died on branch-only
@@ -104,7 +115,8 @@ def build_lrseg2_masks(B, L_total, S, starts, scales, mask_scale_ids,
     for k in fine_ids:
         a, l = starts[k], scales[k]
         w = weights[:, a:a + l]
-        revealed, sup = lrseg_reveal(B, l, S, chunks_arg, device)
+        revealed, sup = lrseg_reveal(B, l, S, chunks_arg, device,
+                                     grid_override=grid_override)
         m_pos[:, a:a + l] = revealed
         w[:] = 0.0
         w[sup] = 1.0
@@ -148,6 +160,12 @@ def main():
                          "grid's divisors) "
                          "(inference chunk counts that divide this grid stay "
                          "train-consistent)")
+    ap.add_argument("--chunk_grid", default="",
+                    help="comma list FIXING the training chunk counts for "
+                         "sampler_lrseg/lrseg2 (e.g. '8') instead of the "
+                         "random draw over --chunks divisors; clamped per "
+                         "scale to min(C, l) like the decode. Dedicates all "
+                         "supervision to the deployed C")
     ap.add_argument("--lrseg_scales", default="8,9,10",
                     help="sampler_seg2d only: the scales that get the 2D "
                          "chunk-structured reveal; every other --mask_scales "
@@ -256,6 +274,8 @@ def main():
                       if args.mask_scales else [len(scales) - 2, len(scales) - 1])
     lrseg_scale_ids = set(int(x) for x in args.lrseg_scales.split(",")
                           if x != "")
+    chunk_grid = ([int(x) for x in args.chunk_grid.split(",") if x]
+                  if args.chunk_grid else None)
     if args.mask_mode in ("sampler_seg2d", "sampler_lrseg2"):
         assert lrseg_scale_ids <= set(mask_scale_ids), \
             "--lrseg_scales must be a subset of --mask_scales"
@@ -380,7 +400,8 @@ def main():
                 (smask, smode, scales1, smask2, smode2,
                  scales2) = build_lrseg2_masks(
                     B, L_total, S, starts, scales, mask_scale_ids,
-                    lrseg_scale_ids, args.chunks, weights, device)
+                    lrseg_scale_ids, args.chunks, weights, device,
+                    grid_override=chunk_grid)
             elif sampler_arm:
                 arm = args.mask_mode
                 if arm == "sampler_mix":
@@ -445,7 +466,8 @@ def main():
                         w[sup] = 1.0
                     elif arm == "sampler_lrseg":
                         revealed, sup = lrseg_reveal(B, l, S, args.chunks,
-                                                     device)
+                                                     device,
+                                                     grid_override=chunk_grid)
                         smask[:, a:a + l] = revealed
                         w[:] = 0.0
                         # supervise ONLY the current chunk's masked slots:

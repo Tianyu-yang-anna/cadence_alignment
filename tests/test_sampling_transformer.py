@@ -1035,3 +1035,32 @@ def test_lrseg2_mask_builder_both_band_shapes(all_lrseg):
     m1 = smask if smask2 is None else (smask | smask2)
     assert bool((weights == 1.0).any())
     assert not bool(((weights == 1.0) & m1).any())
+
+
+@pytest.mark.parametrize("C,l,expect", [(8, 32, {8}), (16, 4, {4}), (16, 32, {16})])
+def test_lrseg_reveal_fixed_grid_clamps_like_the_decode(C, l, expect):
+    """--chunk_grid fixes the training chunk count; short scales clamp to
+    min(C, l) exactly as the decode does. Every revealed prefix must land on
+    the fixed grid's boundaries (width l/C_eff) — no other C is trained."""
+    import importlib.util
+    from pathlib import Path
+    spec = importlib.util.spec_from_file_location(
+        "ft3", Path(__file__).resolve().parents[1] / "finetune_prefix_maskgit.py")
+    ft = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(ft)
+    torch.manual_seed(0)
+    B, S = 128, 4
+    revealed, sup = ft.lrseg_reveal(B, l, S, 32, torch.device("cpu"),
+                                    grid_override=[C])
+    c_eff = min(C, l)
+    assert c_eff in expect
+    width = l // c_eff
+    fully = revealed.all(-1)
+    for b in range(B):
+        pref = int(fully[b].long().cumsum(0)[-1])
+        assert pref % width == 0, \
+            f"prefix {pref} not on the C={c_eff} grid (width {width})"
+        # the supervised chunk is exactly one grid cell
+        rows = sup[b].any(-1).nonzero().flatten()
+        if len(rows):
+            assert int(rows[-1] - rows[0]) < width, "supervised span too wide"
