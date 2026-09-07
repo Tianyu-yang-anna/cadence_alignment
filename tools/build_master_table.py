@@ -101,6 +101,21 @@ ROWS = [
      "benchgen_planner_prefix_owt2_pqsh_sg56ln", "_finalSEGHWLN", 22, 88,
      "主线对照 = _finalSEG（token 加权）"),
 
+    # ---- full-data 12.8B tier (separate budget tier, disclosed) ----------
+    ("cadence12", "全量·段轴 M=8（seg:all:4）",
+     "benchgen_planner_prefix_owt2_pqsh_b12sg8", "_final12SG8", 22, 88,
+     "链=36000 基座+6400 mg+6400 sampler_seg(M8)，旧最优配方 6.4× 等比放大。"
+     "对 2B 主线：R1 +5.5/R2 +1.8/wiki MAUVE 11.96→14.40——sel 上的 wiki 回落"
+     "未在 test 出现。对段轴 M1：wiki MAUVE +1.9（多掩码贡献真实但温和）"),
+    ("cadence12", "全量·段轴 M=1（数据单变量缩放锚点）",
+     "benchgen_planner_prefix_owt2_pqsh_b12sg1", "_final12SG1", 22, 88,
+     "与 2B 主线唯一差异=数据/步数 6.4×，量化『纯加数据』：R1 +5.5、R2 +1.8、"
+     "wiki MAUVE +0.5、WS MAUVE +2.0"),
+    ("cadence12", "全量·2D M=8（C2K2@88）",
+     "benchgen_planner_prefix_owt2_pqsh_b12s2e8", "_final12E88", 22, 88,
+     "全量档 R1/R2 四集最高（wiki 29.00/4.43 与 ELF 公平臂 28.99 打平而 NFE "
+     "≈1/6，R2 仍差 0.8）；wiki MAUVE 13.99 与段轴 M8 带内"),
+
     # ---- ELF baseline (external pretrained encoder; footnoted) ----------
     ("elf", "ELF pre2（预训练 T5 enc + 重标 EMA，ODE64 CFG2）",
      "benchgen_elf_owt2_t5_pre2", "_finalELFP2", 128, 0,
@@ -150,6 +165,8 @@ ROWS = [
 ]
 
 GROUP_TITLE = {
+    "cadence12": "★全量 12.8B 档（独立预算档：48800 步 ≈ 1 epoch，"
+                 "不可与 2B 行并读；baseline 均为 2B）",
     "elf": "ELF baseline（arXiv 2605.10938）——外部预训练 encoder，进表须脚注",
     "cadence": "CADENCE 尝试（按机制递进，全部严格 2B）",
     "axis": "三个尺度内解码轴的单变量对比（同父、同 7630 步、depth 全冻结）",
@@ -355,7 +372,8 @@ def main():
            "除标注外全部严格 2B（7630×256×1024 梯度 token）、同数据、同 GPT-2 BPE、",
            "同 12L×768 主干。NFE = 每生成 1024 token 的 backbone 前向次数（CFG 双分支计入）。",
            ""]
-    for group in ["cadence", "axis", "hmar", "elf", "baseline", "degenerate"]:
+    for group in ["cadence", "cadence12", "axis", "hmar", "elf", "baseline",
+                  "degenerate"]:
         rows = [r for r in ROWS if r[0] == group]
         if not any((r[1], b) in idx for r in rows for b in BENCHES):
             continue
