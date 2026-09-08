@@ -1,0 +1,5 @@
+# supplement 2: the 2B 2D-M8 registered-cell test (finalM8)
+benchgen_planner_prefix_owt2_pqsh_b2s2eM8/gens_wikipedia_finalM8.jsonl
+benchgen_planner_prefix_owt2_pqsh_b2s2eM8/gens_wikisource_finalM8.jsonl
+benchgen_planner_prefix_owt2_pqsh_b2s2eM8/gens_tinystories_finalM8.jsonl
+benchgen_planner_prefix_owt2_pqsh_b2s2eM8/gens_lm1b_finalM8.jsonl
