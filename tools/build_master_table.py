@@ -128,6 +128,13 @@ ROWS = [
      "benchgen_elf_owt2_t5_rnd", "_finalELFRt", 128, 0,
      "它们论文自己的消融变体；退化（MAUVE 地板），R1 属高频词面重合，"
      "不可与流畅系统并读"),
+    ("elf", "ELF 公平臂 NFE 对齐（ODE11 CFG2 = 22 前向）",
+     "benchgen_elf_owt2_t5_ours", "_finalELFOURS22", 22, 0,
+     "把 ELF 压到与家族相同的 22 backbone 前向：**降档但不塌**（对照 BD3 在"
+     "NFE 对齐时塌到 0.58）——wiki MAUVE 30.75→24.49、WS 25.25→9.47（-63%）、"
+     "R1/R2 各 -1.6/-1.1。读法：ELF 的优势相当一部分由 NFE 购买（尤其 WS），"
+     "但同预算+同 NFE+自语料下仍显著高于 2B 主线（wiki 24.49 vs 11.96）"
+     "=机制优势为真"),
     ("elf", "ELF 公平臂（39.3B 自语料 enc，ODE64 CFG2）",
      "benchgen_elf_owt2_t5_ours", "_finalELFOURS", 128, 0,
      "三点归因中间点：encoder 换成我们自己语料上按 tokenizer 同额侧预算"
