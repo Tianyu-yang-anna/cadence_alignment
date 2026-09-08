@@ -1,0 +1,22 @@
+{
+  "protocol": "paired N=32/96 runs on one H100; per-sample = (t96-t32)/64; generation phase only (load cancels in the difference); wikipedia bench rows; 2026-09-08",
+  "batch1_s_per_sample": {
+    "cadence_seg_all4_22p88": 0.56,
+    "cadence_2d_c2k2_22p88": 0.55,
+    "elf12_ode64_128fwd": 1.59,
+    "elf12_ode11_22fwd": 0.30,
+    "bd3lm_recipe_1024fwd_evalbatch1": 5.72
+  },
+  "batch32_s_per_sample": {
+    "cadence_seg_all4_22p88": 0.219,
+    "cadence_2d_c2k2_22p88": 0.219,
+    "elf12_ode64_128fwd": 0.22,
+    "elf12_ode11_22fwd": 0.047
+  },
+  "notes": [
+    "CADENCE batch=32 uses the new --gen_batch throughput path (30fd87d); registered quality rows remain batch=1",
+    "BD3 eval_batch_size=1 is its ported recipe requirement; no batch32 point",
+    "CADENCE batching gain 2.5x (0.56->0.219): the 88 small sampler kernels stay launch-bound",
+    "ELF batch-1 penalty 7x (0.22->1.59): 128 sequential forwards bite in the latency regime"
+  ]
+}
