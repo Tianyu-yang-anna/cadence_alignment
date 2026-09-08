@@ -1,0 +1,5 @@
+# supplement 4: the 12.8B alpha-chain registered test
+benchgen_planner_prefix_owt2_pqsh_b12a25sg1/gens_wikipedia_final12A25.jsonl
+benchgen_planner_prefix_owt2_pqsh_b12a25sg1/gens_wikisource_final12A25.jsonl
+benchgen_planner_prefix_owt2_pqsh_b12a25sg1/gens_tinystories_final12A25.jsonl
+benchgen_planner_prefix_owt2_pqsh_b12a25sg1/gens_lm1b_final12A25.jsonl
