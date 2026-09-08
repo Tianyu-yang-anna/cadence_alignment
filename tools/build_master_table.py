@@ -122,6 +122,13 @@ ROWS = [
      "全量档 R1/R2 四集最高（wiki 29.00/4.43 与 ELF 公平臂 28.99 打平而 NFE "
      "≈1/6，R2 仍差 0.8）；wiki MAUVE 13.99 与段轴 M8 带内"),
 
+    ("cadence12", "全量·α=0.25 链 M=1（加权 12.8B 版）",
+     "benchgen_planner_prefix_owt2_pqsh_b12a25sg1", "_final12A25", 22, 88,
+     "α 支按规则选 M1（WS MAUVE 定）。对单变量对照 token-M1：wiki/WS R1 反降"
+     " 0.5/0.6、R2 微涨、1BW R1 10.17=家族最高、TS R2 5.38 —— **2B 档的"
+     "α 全面 R1/R2 增益在 12.8B 不复现，损失重加权是小数据杠杆**；12.8B "
+     "注册点维持 2D-M8/段轴-M8"),
+
     # ---- ELF baseline (external pretrained encoder; footnoted) ----------
     ("elf", "ELF pre2（预训练 T5 enc + 重标 EMA，ODE64 CFG2）",
      "benchgen_elf_owt2_t5_pre2", "_finalELFP2", 128, 0,
@@ -293,6 +300,15 @@ SEL_SWEEPS = [
      "全量下混合训练不再摊薄：本臂 seg:all:4 对照（wiki MAUVE 20.89）反超段轴"
      "专训臂（19.21）。臂内赢家按规则=C2K2@88（wiki MAUVE 带宽内→R1 近平→WS "
      "MAUVE 19.14 定）。"),
+    ("★全量 12.8B 档·α=0.25 链（`b12a25sg1`/`b12a25sg8`）",
+     "benchgen_planner_prefix_owt2_pqsh_b12a25sg1",
+     [("α M=1 seg:all:4", "_segall4")],
+     "α-M8（b12a25sg8/_segall4）= wiki 27.29/4.13/21.84、WS 33.37/5.81/22.69。"
+     "支内按规则选 M1（wiki MAUVE 带内→R1 平→WS MAUVE 27.60>22.69）。"),
+    ("★全量 12.8B 档·α=0.25 M8（`b12a25sg8`）",
+     "benchgen_planner_prefix_owt2_pqsh_b12a25sg8",
+     [("α M=8 seg:all:4", "_segall4")],
+     "见上表 caveat。"),
     ("ELF（arXiv 2605.10938）sel 扫描 —— 原始权重（EMA 校准 bug 修正后）",
      "benchgen_elf_owt2_t5_pre",
      [("pre：ODE64 CFG2（未截断）", "_rs64c2"),
