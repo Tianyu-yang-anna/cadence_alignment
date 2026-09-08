@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="380" font-family="Helvetica,Arial">
+<text x="239" y="28" text-anchor="middle" font-size="15" font-weight="bold">质量 vs 粒度（NFE 70→448 全程平坦）</text>
+<rect x="55" y="40" width="368" height="285" fill="none" stroke="#999"/>
+<text x="82" y="341" text-anchor="middle" font-size="10">70</text>
+<text x="121" y="341" text-anchor="middle" font-size="10">88</text>
+<text x="163" y="341" text-anchor="middle" font-size="10">112</text>
+<text x="225" y="341" text-anchor="middle" font-size="10">160</text>
+<text x="306" y="341" text-anchor="middle" font-size="10">256</text>
+<text x="403" y="341" text-anchor="middle" font-size="10">448</text>
+<text x="49" y="329" text-anchor="end" font-size="10">0</text>
+<line x1="55" y1="325" x2="422" y2="325" stroke="#eee"/>
+<text x="49" y="279" text-anchor="end" font-size="10">7</text>
+<line x1="55" y1="275" x2="422" y2="275" stroke="#eee"/>
+<text x="49" y="229" text-anchor="end" font-size="10">14</text>
+<line x1="55" y1="225" x2="422" y2="225" stroke="#eee"/>
+<text x="49" y="179" text-anchor="end" font-size="10">21</text>
+<line x1="55" y1="175" x2="422" y2="175" stroke="#eee"/>
+<text x="49" y="129" text-anchor="end" font-size="10">28</text>
+<line x1="55" y1="125" x2="422" y2="125" stroke="#eee"/>
+<text x="49" y="79" text-anchor="end" font-size="10">35</text>
+<line x1="55" y1="75" x2="422" y2="75" stroke="#eee"/>
+<polyline points="81.7,232.2 96.0,249.5 121.4,240.6 163.2,233.0 225.0,246.8 306.5,231.3 403.5,235.8" fill="none" stroke="#c0392b" stroke-width="2"/>
+<circle cx="81.7" cy="232.2" r="3" fill="#c0392b"/>
+<circle cx="96.0" cy="249.5" r="3" fill="#c0392b"/>
+<circle cx="121.4" cy="240.6" r="3" fill="#c0392b"/>
+<circle cx="163.2" cy="233.0" r="3" fill="#c0392b"/>
+<circle cx="225.0" cy="246.8" r="3" fill="#c0392b"/>
+<circle cx="306.5" cy="231.3" r="3" fill="#c0392b"/>
+<circle cx="403.5" cy="235.8" r="3" fill="#c0392b"/>
+<text x="63" y="57" font-size="11" fill="#c0392b">wiki MAUVE@256</text>
+<polyline points="81.7,288.8 96.0,273.8 121.4,271.8 163.2,271.4 225.0,258.4 306.5,276.1 403.5,263.9" fill="none" stroke="#2471a3" stroke-width="2"/>
+<circle cx="81.7" cy="288.8" r="3" fill="#2471a3"/>
+<circle cx="96.0" cy="273.8" r="3" fill="#2471a3"/>
+<circle cx="121.4" cy="271.8" r="3" fill="#2471a3"/>
+<circle cx="163.2" cy="271.4" r="3" fill="#2471a3"/>
+<circle cx="225.0" cy="258.4" r="3" fill="#2471a3"/>
+<circle cx="306.5" cy="276.1" r="3" fill="#2471a3"/>
+<circle cx="403.5" cy="263.9" r="3" fill="#2471a3"/>
+<text x="63" y="71" font-size="11" fill="#2471a3">WS MAUVE@256</text>
+<polyline points="81.7,118.3 96.0,118.0 121.4,117.7 163.2,118.0 225.0,117.8 306.5,117.3 403.5,116.9" fill="none" stroke="#1e8449" stroke-width="2"/>
+<circle cx="81.7" cy="118.3" r="3" fill="#1e8449"/>
+<circle cx="96.0" cy="118.0" r="3" fill="#1e8449"/>
+<circle cx="121.4" cy="117.7" r="3" fill="#1e8449"/>
+<circle cx="163.2" cy="118.0" r="3" fill="#1e8449"/>
+<circle cx="225.0" cy="117.8" r="3" fill="#1e8449"/>
+<circle cx="306.5" cy="117.3" r="3" fill="#1e8449"/>
+<circle cx="403.5" cy="116.9" r="3" fill="#1e8449"/>
+<text x="63" y="85" font-size="11" fill="#1e8449">wiki R1</text>
+<text x="239" y="366" text-anchor="middle" font-size="11">NFE（log 轴）</text>
+<text x="17" y="31" font-size="11">分数</text>
+<text x="661" y="28" text-anchor="middle" font-size="15" font-weight="bold">时延 vs 粒度（0.50→1.67s 单调 3.3×）</text>
+<rect x="477.5" y="40" width="368" height="285" fill="none" stroke="#999"/>
+<text x="504" y="341" text-anchor="middle" font-size="10">70</text>
+<text x="544" y="341" text-anchor="middle" font-size="10">88</text>
+<text x="586" y="341" text-anchor="middle" font-size="10">112</text>
+<text x="648" y="341" text-anchor="middle" font-size="10">160</text>
+<text x="729" y="341" text-anchor="middle" font-size="10">256</text>
+<text x="826" y="341" text-anchor="middle" font-size="10">448</text>
+<text x="471.5" y="329" text-anchor="end" font-size="10">0</text>
+<line x1="477.5" y1="325" x2="845" y2="325" stroke="#eee"/>
+<text x="471.5" y="204" text-anchor="end" font-size="10">1</text>
+<line x1="477.5" y1="200" x2="845" y2="200" stroke="#eee"/>
+<text x="471.5" y="79" text-anchor="end" font-size="10">2</text>
+<line x1="477.5" y1="75" x2="845" y2="75" stroke="#eee"/>
+<polyline points="504.2,262.5 518.5,261.2 543.9,257.5 585.7,248.8 647.5,229.4 729.0,190.0 826.0,116.2" fill="none" stroke="#c0392b" stroke-width="2"/>
+<circle cx="504.2" cy="262.5" r="3" fill="#c0392b"/>
+<circle cx="518.5" cy="261.2" r="3" fill="#c0392b"/>
+<circle cx="543.9" cy="257.5" r="3" fill="#c0392b"/>
+<circle cx="585.7" cy="248.8" r="3" fill="#c0392b"/>
+<circle cx="647.5" cy="229.4" r="3" fill="#c0392b"/>
+<circle cx="729.0" cy="190.0" r="3" fill="#c0392b"/>
+<circle cx="826.0" cy="116.2" r="3" fill="#c0392b"/>
+<text x="485.5" y="57" font-size="11" fill="#c0392b">时延 s/样本（batch=1）</text>
+<text x="661" y="366" text-anchor="middle" font-size="11">NFE（log 轴）</text>
+<text x="439.5" y="31" font-size="11">s/样本</text>
+</svg>
