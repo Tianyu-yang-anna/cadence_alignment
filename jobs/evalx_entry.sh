@@ -57,4 +57,5 @@ if [ -f "$LOCAL_ROOT/evalx/failures.txt" ]; then
   exit 1
 fi
 log "evalx DONE ($i files)"
-push_log
+push_log || true
+exit 0

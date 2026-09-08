@@ -1,0 +1,14 @@
+{
+  "gen_file": "/tmp/cadence_local/evalx/benchgen_elf_owt2_t5_ours12_gens_lm1b_finalELF12.jsonl",
+  "n": 1000,
+  "judge": "gpt2-large",
+  "protocol": "extra-metrics v1",
+  "gen_ppl": 842.8253829936735,
+  "gen_ppl_seqmean": 1758.4735992832057,
+  "gen_tokens": 26342,
+  "ref_gen_ppl": 45.05720933455515,
+  "ref_gen_ppl_seqmean": 76.05996706228615,
+  "unigram_entropy": 9.03090241112627,
+  "ref_unigram_entropy": 10.063046210828563,
+  "mauve_1024": 0.005257351051323987
+}
