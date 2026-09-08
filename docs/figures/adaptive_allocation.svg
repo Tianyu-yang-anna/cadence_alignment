@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="400" font-family="Helvetica,Arial">
+<text x="250" y="26" text-anchor="middle" font-size="14" font-weight="bold">描述长度份额：最易 vs 最难四分位</text>
+<rect x="60" y="50" width="380" height="290" fill="none" stroke="#999"/>
+<line x1="60" y1="340" x2="440" y2="340" stroke="#eee"/>
+<text x="54" y="344" text-anchor="end" font-size="10">0.01%</text>
+<line x1="60" y1="272" x2="440" y2="272" stroke="#eee"/>
+<text x="54" y="276" text-anchor="end" font-size="10">0.1%</text>
+<line x1="60" y1="205" x2="440" y2="205" stroke="#eee"/>
+<text x="54" y="209" text-anchor="end" font-size="10">1%</text>
+<line x1="60" y1="138" x2="440" y2="138" stroke="#eee"/>
+<text x="54" y="142" text-anchor="end" font-size="10">10%</text>
+<line x1="60" y1="70" x2="440" y2="70" stroke="#eee"/>
+<text x="54" y="74" text-anchor="end" font-size="10">100%</text>
+<polyline points="60.0,310.9 98.0,268.9 136.0,240.6 174.0,215.9 212.0,193.0 250.0,171.5 288.0,152.0 326.0,134.8 364.0,119.6 402.0,110.3 440.0,102.1" fill="none" stroke="#2471a3" stroke-width="2"/>
+<circle cx="60.0" cy="310.9" r="3" fill="#2471a3"/>
+<circle cx="98.0" cy="268.9" r="3" fill="#2471a3"/>
+<circle cx="136.0" cy="240.6" r="3" fill="#2471a3"/>
+<circle cx="174.0" cy="215.9" r="3" fill="#2471a3"/>
+<circle cx="212.0" cy="193.0" r="3" fill="#2471a3"/>
+<circle cx="250.0" cy="171.5" r="3" fill="#2471a3"/>
+<circle cx="288.0" cy="152.0" r="3" fill="#2471a3"/>
+<circle cx="326.0" cy="134.8" r="3" fill="#2471a3"/>
+<circle cx="364.0" cy="119.6" r="3" fill="#2471a3"/>
+<circle cx="402.0" cy="110.3" r="3" fill="#2471a3"/>
+<circle cx="440.0" cy="102.1" r="3" fill="#2471a3"/>
+<polyline points="60.0,318.7 98.0,272.7 136.0,242.7 174.0,217.9 212.0,195.0 250.0,173.6 288.0,153.8 326.0,135.6 364.0,118.6 402.0,107.7 440.0,103.8" fill="none" stroke="#c0392b" stroke-width="2"/>
+<circle cx="60.0" cy="318.7" r="3" fill="#c0392b"/>
+<circle cx="98.0" cy="272.7" r="3" fill="#c0392b"/>
+<circle cx="136.0" cy="242.7" r="3" fill="#c0392b"/>
+<circle cx="174.0" cy="217.9" r="3" fill="#c0392b"/>
+<circle cx="212.0" cy="195.0" r="3" fill="#c0392b"/>
+<circle cx="250.0" cy="173.6" r="3" fill="#c0392b"/>
+<circle cx="288.0" cy="153.8" r="3" fill="#c0392b"/>
+<circle cx="326.0" cy="135.6" r="3" fill="#c0392b"/>
+<circle cx="364.0" cy="118.6" r="3" fill="#c0392b"/>
+<circle cx="402.0" cy="107.7" r="3" fill="#c0392b"/>
+<circle cx="440.0" cy="103.8" r="3" fill="#c0392b"/>
+<text x="68" y="68" font-size="11" fill="#2471a3">Q1 最易 25%</text>
+<text x="68" y="82" font-size="11" fill="#c0392b">Q4 最难 25%</text>
+<text x="690" y="26" text-anchor="middle" font-size="14" font-weight="bold">自适应指纹：r(份额, 难度)，n=2048</text>
+<rect x="500.0" y="50" width="380" height="290" fill="none" stroke="#999"/>
+<line x1="500.0" y1="205" x2="880" y2="205" stroke="#555"/>
+<line x1="500.0" y1="340" x2="880" y2="340" stroke="#eee"/>
+<text x="494.0" y="344" text-anchor="end" font-size="10">-1.0</text>
+<line x1="500.0" y1="272" x2="880" y2="272" stroke="#eee"/>
+<text x="494.0" y="276" text-anchor="end" font-size="10">-0.5</text>
+<line x1="500.0" y1="138" x2="880" y2="138" stroke="#eee"/>
+<text x="494.0" y="142" text-anchor="end" font-size="10">+0.5</text>
+<line x1="500.0" y1="70" x2="880" y2="70" stroke="#eee"/>
+<text x="494.0" y="74" text-anchor="end" font-size="10">+1.0</text>
+<rect x="489.3" y="205.0" width="21.4" height="36.5" fill="#2471a3" opacity="0.85"/>
+<text x="500.0" y="255.5" text-anchor="middle" font-size="9">-0.27</text>
+<rect x="527.3" y="205.0" width="21.4" height="21.1" fill="#2471a3" opacity="0.85"/>
+<text x="538.0" y="240.1" text-anchor="middle" font-size="9">-0.16</text>
+<rect x="565.3" y="205.0" width="21.4" height="24.5" fill="#2471a3" opacity="0.85"/>
+<text x="576.0" y="243.5" text-anchor="middle" font-size="9">-0.18</text>
+<rect x="603.3" y="205.0" width="21.4" height="50.0" fill="#2471a3" opacity="0.85"/>
+<text x="614.0" y="269.0" text-anchor="middle" font-size="9">-0.37</text>
+<rect x="641.3" y="205.0" width="21.4" height="86.6" fill="#2471a3" opacity="0.85"/>
+<text x="652.0" y="305.6" text-anchor="middle" font-size="9">-0.64</text>
+<rect x="679.3" y="205.0" width="21.4" height="111.9" fill="#2471a3" opacity="0.85"/>
+<text x="690.0" y="330.9" text-anchor="middle" font-size="9">-0.83</text>
+<rect x="717.3" y="205.0" width="21.4" height="100.4" fill="#2471a3" opacity="0.85"/>
+<text x="728.0" y="319.4" text-anchor="middle" font-size="9">-0.74</text>
+<rect x="755.3" y="205.0" width="21.4" height="58.6" fill="#2471a3" opacity="0.85"/>
+<text x="766.0" y="277.6" text-anchor="middle" font-size="9">-0.43</text>
+<rect x="793.3" y="136.0" width="21.4" height="69.0" fill="#c0392b" opacity="0.85"/>
+<text x="804.0" y="130.0" text-anchor="middle" font-size="9">+0.51</text>
+<rect x="831.3" y="92.8" width="21.4" height="112.2" fill="#c0392b" opacity="0.85"/>
+<text x="842.0" y="86.8" text-anchor="middle" font-size="9">+0.83</text>
+<rect x="869.3" y="205.0" width="21.4" height="89.5" fill="#2471a3" opacity="0.85"/>
+<text x="880.0" y="308.5" text-anchor="middle" font-size="9">-0.66</text>
+<text x="60.0" y="356" text-anchor="middle" font-size="9">q1</text>
+<text x="98.0" y="356" text-anchor="middle" font-size="9">q2</text>
+<text x="136.0" y="356" text-anchor="middle" font-size="9">q4</text>
+<text x="174.0" y="356" text-anchor="middle" font-size="9">q8</text>
+<text x="212.0" y="356" text-anchor="middle" font-size="9">q16</text>
+<text x="250.0" y="356" text-anchor="middle" font-size="9">q32</text>
+<text x="288.0" y="356" text-anchor="middle" font-size="9">q64</text>
+<text x="326.0" y="356" text-anchor="middle" font-size="9">q128</text>
+<text x="364.0" y="356" text-anchor="middle" font-size="9">q256</text>
+<text x="402.0" y="356" text-anchor="middle" font-size="9">q512</text>
+<text x="440.0" y="356" text-anchor="middle" font-size="9">q1024</text>
+<text x="500.0" y="356" text-anchor="middle" font-size="9">q1</text>
+<text x="538.0" y="356" text-anchor="middle" font-size="9">q2</text>
+<text x="576.0" y="356" text-anchor="middle" font-size="9">q4</text>
+<text x="614.0" y="356" text-anchor="middle" font-size="9">q8</text>
+<text x="652.0" y="356" text-anchor="middle" font-size="9">q16</text>
+<text x="690.0" y="356" text-anchor="middle" font-size="9">q32</text>
+<text x="728.0" y="356" text-anchor="middle" font-size="9">q64</text>
+<text x="766.0" y="356" text-anchor="middle" font-size="9">q128</text>
+<text x="804.0" y="356" text-anchor="middle" font-size="9">q256</text>
+<text x="842.0" y="356" text-anchor="middle" font-size="9">q512</text>
+<text x="880.0" y="356" text-anchor="middle" font-size="9">q1024</text>
+</svg>
