@@ -128,6 +128,18 @@ ROWS = [
      "benchgen_elf_owt2_t5_rnd", "_finalELFRt", 128, 0,
      "它们论文自己的消融变体；退化（MAUVE 地板），R1 属高频词面重合，"
      "不可与流畅系统并读"),
+    ("elf", "ELF-12.8B（生成预算与全量档同额，ODE64 CFG2 = 128 前向）",
+     "benchgen_elf_owt2_t5_ours12", "_finalELF12", 128, 0,
+     "公平臂 flow 模型重训至 48800 步=12.8B（encoder 不变 39.3B 自语料；EMA "
+     "0.999805 同规则重标）。数据缩放对 ELF 同样有效（wiki MAUVE 30.75→35.76、"
+     "R2 5.25→6.24）。与 CADENCE 全量档同预算层，但 NFE 仍 ~6×"),
+    ("elf", "ELF-12.8B @22 前向（完全同层格：同语料+同侧预算+同生成预算+对齐 NFE）",
+     "benchgen_elf_owt2_t5_ours12", "_finalELF12N22", 22, 0,
+     "**全对齐终点**：对 CADENCE 全量 2D M8（29.00/4.43/13.99）——R1 反而 "
+     "CADENCE 高 0.5、TS R1 高 2.6；ELF 剩 R2 +0.2 与 wiki/WS MAUVE "
+     "+3.8/+3.6。原生配方下 25 分的 MAUVE 鸿沟在全对齐后收缩到 ~4 分："
+     "ELF 的支配性优势按序分解为 NFE（大头）、数据档（中）、机制（residual "
+     "~4 分 MAUVE + 更流利/更保守的分布）"),
     ("elf", "ELF 公平臂 NFE 对齐（ODE11 CFG2 = 22 前向）",
      "benchgen_elf_owt2_t5_ours", "_finalELFOURS22", 22, 0,
      "把 ELF 压到与家族相同的 22 backbone 前向：**降档但不塌**（对照 BD3 在"

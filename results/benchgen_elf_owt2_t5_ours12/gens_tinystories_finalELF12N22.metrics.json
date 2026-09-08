@@ -1,0 +1,12 @@
+{
+  "gen_file": "/tmp/cadence_local/elfgen/gens_tinystories_finalELF12N22.jsonl",
+  "n": 1000,
+  "rouge1": 0.3109325450442654,
+  "rouge2": 0.043628390815966984,
+  "rougeL": 0.17980252564581758,
+  "distinct1": 0.17644419109531723,
+  "distinct2": 0.6918515426452714,
+  "ref_distinct2": 0.4462380099600128,
+  "bertscore_f1": 0.8178162574768066,
+  "mauve": 0.005459736112494164
+}
