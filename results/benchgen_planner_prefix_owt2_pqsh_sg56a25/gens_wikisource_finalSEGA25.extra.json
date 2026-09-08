@@ -1,0 +1,14 @@
+{
+  "gen_file": "/tmp/cadence_local/evalx/benchgen_planner_prefix_owt2_pqsh_sg56a25_gens_wikisource_finalSEGA25.jsonl",
+  "n": 1000,
+  "judge": "gpt2-large",
+  "protocol": "extra-metrics v1",
+  "gen_ppl": 341.52892466276427,
+  "gen_ppl_seqmean": 519.1313307558239,
+  "gen_tokens": 252526,
+  "ref_gen_ppl": 19.499693767639172,
+  "ref_gen_ppl_seqmean": 39.44674472946092,
+  "unigram_entropy": 10.183189645888875,
+  "ref_unigram_entropy": 10.433135066583553,
+  "mauve_1024": 0.0061419972605410355
+}

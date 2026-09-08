@@ -336,6 +336,58 @@ SEL_SWEEPS = [
 ]
 
 
+# ---- post-hoc extra metrics (tools/eval_extra.py outputs) ----------------
+EXTRA_ROWS = [
+    ("全量 2D M8 C2K2@88", "benchgen_planner_prefix_owt2_pqsh_b12s2e8", "final12E88"),
+    ("全量段轴 M8", "benchgen_planner_prefix_owt2_pqsh_b12sg8", "final12SG8"),
+    ("全量段轴 M1", "benchgen_planner_prefix_owt2_pqsh_b12sg1", "final12SG1"),
+    ("2B 主线 seg:all:4", "benchgen_planner_prefix_owt2_pqsh_b2sg", "finalSEG"),
+    ("α=0.25 链", "benchgen_planner_prefix_owt2_pqsh_sg56a25", "finalSEGA25"),
+    ("BD3-LM", "benchgen_bd3lm_owt2", "final"),
+    ("AR", "benchgen_ar_owt2", "final"),
+    ("MDLM", "benchgen_mdlm_owt2", "final"),
+    ("ELF 公平臂", "benchgen_elf_owt2_t5_ours", "finalELFOURS"),
+    ("ELF pre2", "benchgen_elf_owt2_t5_pre2", "finalELFP2"),
+    ("SSD-LM（退化锚）", "benchgen_ssdlm_owt2", "S10"),
+]
+
+
+def emit_extra_tables(results: Path, out: list):
+    def ld(d, b, t):
+        p = results / d / f"gens_{b}_{t}.extra.json"
+        return json.loads(p.read_text()) if p.exists() else None
+    out += ["---", "", "# 事后新指标（2026-09-08 协议变更，gpt2-large 判官，"
+            "对注册 gens 重打分不重生成；R1/R2 降为辅助指标）", ""]
+    out += ["## MAUVE@1024（×100；对照 @256 主表：全场塌到地板 = 评满全长后"
+            "没有系统能匹配参考分布，256 截断承担了区分度）", "",
+            "| 系统 | " + " | ".join(BENCH_LABEL[b] for b in BENCHES) + " |",
+            "|---|" + "---|" * len(BENCHES)]
+    for lb, d, t in EXTRA_ROWS:
+        cells = [(f"{r['mauve_1024']*100:.2f}" if (r := ld(d, b, t)) else "—")
+                 for b in BENCHES]
+        out.append(f"| {lb} | " + " | ".join(cells) + " |")
+    out += ["", "## Gen-PPL（corpus 级，括号=逐句均值；**必须与熵并读**——"
+            "低熵词汤可刷低判官 PPL，见 SSD-LM/AR 行）", "",
+            "| 系统 | " + " | ".join(BENCH_LABEL[b] for b in BENCHES) + " |",
+            "|---|" + "---|" * len(BENCHES)]
+    for lb, d, t in EXTRA_ROWS:
+        cells = [(f"{r['gen_ppl']:.1f} ({r['gen_ppl_seqmean']:.0f})"
+                  if (r := ld(d, b, t)) else "—") for b in BENCHES]
+        out.append(f"| {lb} | " + " | ".join(cells) + " |")
+    r0 = [ld("benchgen_bd3lm_owt2", b, "final") for b in BENCHES]
+    if all(r0):
+        out.append("| **参考文本锚** | " + " | ".join(
+            f"{r['ref_gen_ppl']:.1f}" for r in r0) + " |")
+    out += ["", "## Unigram 熵（bits，括号=参考锚）", "",
+            "| 系统 | " + " | ".join(BENCH_LABEL[b] for b in BENCHES) + " |",
+            "|---|" + "---|" * len(BENCHES)]
+    for lb, d, t in EXTRA_ROWS:
+        cells = [(f"{r['unigram_entropy']:.2f} ({r['ref_unigram_entropy']:.2f})"
+                  if (r := ld(d, b, t)) else "—") for b in BENCHES]
+        out.append(f"| {lb} | " + " | ".join(cells) + " |")
+    out.append("")
+
+
 def load(results: Path, run_dir: str, tag: str, bench: str):
     p = results / run_dir / f"gens_{bench}{tag}.metrics.json"
     if not p.exists():
@@ -431,6 +483,7 @@ def main():
         w.writeheader()
         w.writerows(flat)
 
+    emit_extra_tables(results, out)
     Path(args.out_md).write_text("\n".join(out) + "\n")
     print(f"wrote {args.out_md} and {args.out_csv}: {len(flat)} cells, "
           f"{len({r['label'] for r in flat})} arms")

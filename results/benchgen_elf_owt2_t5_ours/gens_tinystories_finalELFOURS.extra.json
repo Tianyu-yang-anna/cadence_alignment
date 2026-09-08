@@ -1,0 +1,14 @@
+{
+  "gen_file": "/tmp/cadence_local/evalx/benchgen_elf_owt2_t5_ours_gens_tinystories_finalELFOURS.jsonl",
+  "n": 1000,
+  "judge": "gpt2-large",
+  "protocol": "extra-metrics v1",
+  "gen_ppl": 56.32706473353594,
+  "gen_ppl_seqmean": 64.45947301952963,
+  "gen_tokens": 100912,
+  "ref_gen_ppl": 7.17543738468695,
+  "ref_gen_ppl_seqmean": 7.59295237345453,
+  "unigram_entropy": 8.932968199559612,
+  "ref_unigram_entropy": 8.66335053323845,
+  "mauve_1024": 0.005347815458093331
+}

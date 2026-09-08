@@ -1,0 +1,14 @@
+{
+  "gen_file": "/tmp/cadence_local/evalx/benchgen_ssdlm_owt2_gens_lm1b_S10.jsonl",
+  "n": 1000,
+  "judge": "gpt2-large",
+  "protocol": "extra-metrics v1",
+  "gen_ppl": 453.904891099926,
+  "gen_ppl_seqmean": 651.1540352369601,
+  "gen_tokens": 19988,
+  "ref_gen_ppl": 45.05917759975559,
+  "ref_gen_ppl_seqmean": 76.05707773822907,
+  "unigram_entropy": 7.514169706278229,
+  "ref_unigram_entropy": 10.063046210828563,
+  "mauve_1024": 0.004950317786147657
+}
