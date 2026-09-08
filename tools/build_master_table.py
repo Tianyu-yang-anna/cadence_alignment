@@ -101,6 +101,12 @@ ROWS = [
      "benchgen_planner_prefix_owt2_pqsh_sg56ln", "_finalSEGHWLN", 22, 88,
      "主线对照 = _finalSEG（token 加权）"),
 
+    ("cadence", "2D 多掩码 M8（b2s2eM8，seg粗K4+lrseg2细C2K2@88，_finalM8）",
+     "benchgen_planner_prefix_owt2_pqsh_b2s2eM8", "_finalM8", 22, 88,
+     "多掩码波注册枪：sel 上逼平主线（22.75 vs 22.89@88NFE），test 词面平主线"
+     "（R2 2.54>2.51）而 MAUVE 低 2.3 → 2B 注册行维持 _finalSEG；价值=把 2D"
+     "『追平主线』的 NFE 成本从 1016 压到 88"),
+
     # ---- full-data 12.8B tier (separate budget tier, disclosed) ----------
     ("cadence12", "全量·段轴 M=8（seg:all:4）",
      "benchgen_planner_prefix_owt2_pqsh_b12sg8", "_final12SG8", 22, 88,
