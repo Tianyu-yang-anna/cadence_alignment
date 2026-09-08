@@ -73,6 +73,10 @@ def main():
     ap.add_argument("--chunk_scales", default="",
                     help="comma scale INDICES for fixed-order chunk-AR")
     ap.add_argument("--chunk_count", type=int, default=0)
+    ap.add_argument("--gen_batch", type=int, default=1,
+                    help="rows per generation batch (throughput/latency "
+                         "measurement path; 1 = the registered row-by-row "
+                         "path, bit-identical to before)")
     ap.add_argument("--sample_mode", default="",
                     help="intra-scale sampler decode: 'pos:<scales>:<K>' | "
                          "'seg:<scales>:<K>' | 'ar:<scales>' | "
@@ -199,18 +203,7 @@ def main():
     calls = 0
 
     @torch.no_grad()
-    def gen_window(cur: torch.Tensor, generator=gen_rng) -> torch.Tensor:
-        nonlocal calls
-        seed = row_seeds[calls]  # IndexError if run_benchmark's plan drifts
-        calls += 1
-        if seed is not None:
-            generator.manual_seed(seed)
-        B, Lp = cur.shape
-        assert Lp <= seq_len, f"prompt of {Lp} tokens exceeds window {seq_len}"
-        ids = torch.full((B, seq_len), pad_id, dtype=torch.long, device=device)
-        mask = torch.zeros(B, seq_len, dtype=torch.bool, device=device)
-        ids[:, seq_len - Lp:] = cur
-        mask[:, seq_len - Lp:] = True
+    def _gen_core(ids, mask, generator):
         with ac():
             z = tokenizer.encode(ids, mask.long())
             ms = tokenizer.msrvq(z, update=False, mask=mask)
@@ -236,12 +229,51 @@ def main():
                 next(tokenizer.decoder.parameters()).dtype))
         return logits.argmax(dim=-1)
 
+    def gen_window(cur: torch.Tensor, generator=gen_rng) -> torch.Tensor:
+        nonlocal calls
+        seed = row_seeds[calls]  # IndexError if run_benchmark's plan drifts
+        calls += 1
+        if seed is not None:
+            generator.manual_seed(seed)
+        B, Lp = cur.shape
+        assert Lp <= seq_len, f"prompt of {Lp} tokens exceeds window {seq_len}"
+        ids = torch.full((B, seq_len), pad_id, dtype=torch.long, device=device)
+        mask = torch.zeros(B, seq_len, dtype=torch.bool, device=device)
+        ids[:, seq_len - Lp:] = cur
+        mask[:, seq_len - Lp:] = True
+        return _gen_core(ids, mask, generator)
+
+    def gen_window_batch(cur_list) -> torch.Tensor:
+        # throughput path: one shared random stream per BATCH (seeded from the
+        # batch's first row), variable prompt lengths via per-row suffix masks.
+        # Outputs are protocol-valid but not bit-equal to the batch=1 rows.
+        nonlocal calls
+        seed = row_seeds[calls]
+        calls += len(cur_list)
+        if seed is not None:
+            gen_rng.manual_seed(seed)
+        B = len(cur_list)
+        ids = torch.full((B, seq_len), pad_id, dtype=torch.long, device=device)
+        mask = torch.zeros(B, seq_len, dtype=torch.bool, device=device)
+        for j, cur in enumerate(cur_list):
+            Lp = int(cur.shape[-1])
+            assert Lp <= seq_len, f"prompt of {Lp} exceeds window {seq_len}"
+            ids[j, seq_len - Lp:] = cur
+            mask[j, seq_len - Lp:] = True
+        return _gen_core(ids, mask, gen_rng)
+
     log_line(f"benchmark {args.benchmark}: {len(rows)} rows "
              f"(shard {args.shard}/{args.nshards}, T={temps}, top_p={topps}, "
              f"top_k={topks}, cfg={cfgs})")
-    run_benchmark(rows, detok, gen_window, seq_len, args.out,
-                  max_prompt_tokens=max_prompt, chain_cap=args.chain_cap,
-                  device=device, base_seed=args.seed)
+    if args.gen_batch > 1:
+        from generate import run_benchmark_batched
+        run_benchmark_batched(rows, detok, gen_window_batch, seq_len, args.out,
+                              max_prompt_tokens=max_prompt, device=device,
+                              gen_batch=args.gen_batch)
+    else:
+        run_benchmark(rows, detok, gen_window, seq_len, args.out,
+                      max_prompt_tokens=max_prompt, chain_cap=args.chain_cap,
+                      device=device, base_seed=args.seed)
     assert calls == len(row_seeds), \
         f"gen_window ran {calls}x, window plan expected {len(row_seeds)}"
     if args.nshards > 1:

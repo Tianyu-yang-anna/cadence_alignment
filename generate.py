@@ -142,6 +142,43 @@ def run_benchmark(rows, detok, gen_window, seq_len, out_path, *,
     log_line(f"wrote {len(rows)} rows -> {out_path}")
 
 
+def run_benchmark_batched(rows, detok, gen_window_batch, seq_len, out_path, *,
+                          max_prompt_tokens=512, gen_batch=8, device="cpu"):
+    """Throughput variant of run_benchmark: groups single-window rows into
+    batches of gen_batch through gen_window_batch(list of 1D prompt tensors).
+
+    Same protocol (suffix-truncated prompts, word-truncation to the reference
+    length) but NOT bit-equivalent to the row-by-row path: the random stream
+    is seeded once per BATCH instead of per row, so its outputs are for
+    latency/throughput measurement, never for registered quality rows.
+    Chained (multi-window) rows are rejected — chaining is sequential per row.
+    """
+    out_path = Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    prepped = []
+    for i, row in enumerate(rows):
+        ids = detok(row["prompt"],
+                    add_special_tokens=False)["input_ids"][-max_prompt_tokens:]
+        ref_ids = detok(row["reference"], add_special_tokens=False)["input_ids"]
+        assert len(ref_ids) <= seq_len, (
+            f"row {i} needs chained windows; use run_benchmark (batch=1)")
+        prepped.append((i, row,
+                        torch.tensor(ids, dtype=torch.long, device=device)))
+    with open(out_path, "w") as fout:
+        for s in range(0, len(prepped), gen_batch):
+            chunk = prepped[s:s + gen_batch]
+            out_ids = gen_window_batch([c[2] for c in chunk])
+            for (i, row, _), o in zip(chunk, out_ids):
+                text = detok.decode(o.cpu().tolist(), skip_special_tokens=True)
+                gen = " ".join(text.split()[:len(row["reference"].split())])
+                fout.write(json.dumps(
+                    {"index": i, "prompt": row["prompt"],
+                     "reference": row["reference"], "generated": gen}) + "\n")
+            log_line(f"benchmark {min(s + gen_batch, len(prepped))}"
+                     f"/{len(prepped)}")
+    log_line(f"wrote {len(rows)} rows -> {out_path}")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--backend", required=True, choices=["planner", "ar", "oracle"])

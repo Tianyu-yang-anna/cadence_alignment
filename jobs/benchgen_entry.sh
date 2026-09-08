@@ -141,6 +141,8 @@ for b in $BENCHMARKS; do
       [ -n "$RNOISE" ] && SCHED="$SCHED --refine_noise $RNOISE"
     fi
     [ -n "$CHUNKAR" ] && SCHED="$SCHED --chunk_scales ${CHUNKAR%%:*} --chunk_count ${CHUNKAR##*:}"
+    # GEN_BATCH>1 = throughput path (run_benchmark_batched); latency tables only
+    [ -n "${GEN_BATCH:-}" ] && SCHED="$SCHED --gen_batch $GEN_BATCH"
     # SAMPLE_MODE='pos:<scales>:<K>' | 'seg:<scales>:<K>' | 'ar:<scales>' |
     # 'lr:<scales>:<C>:<K>' (constrained left-to-right MaskGIT: C contiguous
     # chunks committed in order, K passes inside each; C=1 is 'pos', C=l with
