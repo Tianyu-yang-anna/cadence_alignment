@@ -1,0 +1,12 @@
+{
+  "gen_file": "/tmp/cadence_local/benchgen/gens_wikipedia_gMx4.jsonl",
+  "n": 1000,
+  "rouge1": 0.29073120639370775,
+  "rouge2": 0.044249411435236384,
+  "rougeL": 0.14848488125494586,
+  "distinct1": 0.2329960280363177,
+  "distinct2": 0.7328379610329521,
+  "ref_distinct2": 0.6965737767251371,
+  "bertscore_f1": 0.7907801270484924,
+  "mauve": 0.1381871310472934
+}

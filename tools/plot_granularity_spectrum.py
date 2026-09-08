@@ -20,7 +20,8 @@ CELLS = [("g1x1", 1, 1, 70, 0.50), ("g1x2", 1, 2, 76, 0.51),
          ("g4x4", 4, 4, 160, 0.78), ("g8x2", 8, 2, 160, 0.75),
          ("g8x4", 8, 4, 256, 1.08), ("g16x4", 16, 4, 448, 1.67),
          # tail cells ran 8-sharded (batch=1 per shard); latency = window/125
-         ("g128x2", 128, 2, 1600, 5.69), ("gMx1", 1024, 1, 3648, 12.23)]
+         ("g128x2", 128, 2, 1600, 5.69), ("gMx1", 1024, 1, 3648, 12.23),
+         ("gMx4", 1024, 4, 14400, 46.0)]
 
 
 def load():
@@ -42,12 +43,12 @@ def svg(rows, out="docs/figures/granularity_spectrum.svg"):
         import math
         parts = [f'<text x="{x0+PW/2:.0f}" y="28" text-anchor="middle" '
                  f'font-size="15" font-weight="bold">{title}</text>']
-        xlo, xhi = math.log(60), math.log(4200)
+        xlo, xhi = math.log(60), math.log(16000)
         def X(nfe): return x0 + (math.log(nfe) - xlo) / (xhi - xlo) * PW
         def Y(v): return H - PAD - (v - ylo) / (yhi - ylo) * (H - 2 * PAD - 20)
         parts.append(f'<rect x="{x0}" y="{PAD-15}" width="{PW:.0f}" '
                      f'height="{H-2*PAD+15}" fill="none" stroke="#999"/>')
-        for nfe in (70, 112, 256, 448, 1600, 3648):
+        for nfe in (70, 256, 1600, 3648, 14400):
             parts.append(f'<text x="{X(nfe):.0f}" y="{H-PAD+16}" '
                          f'text-anchor="middle" font-size="10">{nfe}</text>')
         for gv in range(int(ylo), int(yhi) + 1, max(1, int((yhi-ylo)/5))):
@@ -89,9 +90,9 @@ def svg(rows, out="docs/figures/granularity_spectrum.svg"):
                   [("wiki MAUVE@256", best("wikipedia", 1)),
                    ("WS MAUVE@256", best("wikisource", 1)),
                    ("wiki R1", best("wikipedia", 0))],
-                  "质量 vs 粒度（NFE 70→3648 全程平坦）", "分数", 0, 35)
+                  "质量 vs 粒度（NFE 70→14400=206× 全程平坦）", "分数", 0, 35)
     body += panel(2 * PAD + PW, None, [("时延 s/样本（batch=1）", lat)],
-                  "时延 vs 粒度（0.50→12.2s，线性定律外推 52× 仍准）", "s/样本", 0, 13)
+                  "时延 vs 粒度（0.50→46s；线性定律 206× 外推误差 +1%）", "s/样本", 0, 48)
     body.append("</svg>")
     Path(out).parent.mkdir(parents=True, exist_ok=True)
     Path(out).write_text("\n".join(body))

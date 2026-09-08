@@ -1,12 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="380" font-family="Helvetica,Arial">
-<text x="239" y="28" text-anchor="middle" font-size="15" font-weight="bold">质量 vs 粒度（NFE 70→3648 全程平坦）</text>
+<text x="239" y="28" text-anchor="middle" font-size="15" font-weight="bold">质量 vs 粒度（NFE 70→14400=206× 全程平坦）</text>
 <rect x="55" y="40" width="368" height="285" fill="none" stroke="#999"/>
-<text x="68" y="341" text-anchor="middle" font-size="10">70</text>
-<text x="109" y="341" text-anchor="middle" font-size="10">112</text>
-<text x="180" y="341" text-anchor="middle" font-size="10">256</text>
-<text x="229" y="341" text-anchor="middle" font-size="10">448</text>
-<text x="339" y="341" text-anchor="middle" font-size="10">1600</text>
-<text x="410" y="341" text-anchor="middle" font-size="10">3648</text>
+<text x="65" y="341" text-anchor="middle" font-size="10">70</text>
+<text x="150" y="341" text-anchor="middle" font-size="10">256</text>
+<text x="271" y="341" text-anchor="middle" font-size="10">1600</text>
+<text x="325" y="341" text-anchor="middle" font-size="10">3648</text>
+<text x="416" y="341" text-anchor="middle" font-size="10">14400</text>
 <text x="49" y="329" text-anchor="end" font-size="10">0</text>
 <line x1="55" y1="325" x2="422" y2="325" stroke="#eee"/>
 <text x="49" y="279" text-anchor="end" font-size="10">7</text>
@@ -19,73 +18,74 @@
 <line x1="55" y1="125" x2="422" y2="125" stroke="#eee"/>
 <text x="49" y="79" text-anchor="end" font-size="10">35</text>
 <line x1="55" y1="75" x2="422" y2="75" stroke="#eee"/>
-<polyline points="68.3,232.2 75.4,249.5 88.1,240.6 109.0,233.0 139.8,246.8 180.5,231.3 228.9,235.8 339.0,226.8 410.3,240.4" fill="none" stroke="#c0392b" stroke-width="2"/>
-<circle cx="68.3" cy="232.2" r="3" fill="#c0392b"/>
-<circle cx="75.4" cy="249.5" r="3" fill="#c0392b"/>
-<circle cx="88.1" cy="240.6" r="3" fill="#c0392b"/>
-<circle cx="109.0" cy="233.0" r="3" fill="#c0392b"/>
-<circle cx="139.8" cy="246.8" r="3" fill="#c0392b"/>
-<circle cx="180.5" cy="231.3" r="3" fill="#c0392b"/>
-<circle cx="228.9" cy="235.8" r="3" fill="#c0392b"/>
-<circle cx="339.0" cy="226.8" r="3" fill="#c0392b"/>
-<circle cx="410.3" cy="240.4" r="3" fill="#c0392b"/>
+<polyline points="65.1,232.2 70.6,249.5 80.2,240.6 96.1,233.0 119.5,246.8 150.4,231.3 187.3,235.8 271.0,226.8 325.2,240.4 415.6,226.3" fill="none" stroke="#c0392b" stroke-width="2"/>
+<circle cx="65.1" cy="232.2" r="3" fill="#c0392b"/>
+<circle cx="70.6" cy="249.5" r="3" fill="#c0392b"/>
+<circle cx="80.2" cy="240.6" r="3" fill="#c0392b"/>
+<circle cx="96.1" cy="233.0" r="3" fill="#c0392b"/>
+<circle cx="119.5" cy="246.8" r="3" fill="#c0392b"/>
+<circle cx="150.4" cy="231.3" r="3" fill="#c0392b"/>
+<circle cx="187.3" cy="235.8" r="3" fill="#c0392b"/>
+<circle cx="271.0" cy="226.8" r="3" fill="#c0392b"/>
+<circle cx="325.2" cy="240.4" r="3" fill="#c0392b"/>
+<circle cx="415.6" cy="226.3" r="3" fill="#c0392b"/>
 <text x="63" y="57" font-size="11" fill="#c0392b">wiki MAUVE@256</text>
-<polyline points="68.3,288.8 75.4,273.8 88.1,271.8 109.0,271.4 139.8,258.4 180.5,276.1 228.9,263.9 339.0,275.2 410.3,269.4" fill="none" stroke="#2471a3" stroke-width="2"/>
-<circle cx="68.3" cy="288.8" r="3" fill="#2471a3"/>
-<circle cx="75.4" cy="273.8" r="3" fill="#2471a3"/>
-<circle cx="88.1" cy="271.8" r="3" fill="#2471a3"/>
-<circle cx="109.0" cy="271.4" r="3" fill="#2471a3"/>
-<circle cx="139.8" cy="258.4" r="3" fill="#2471a3"/>
-<circle cx="180.5" cy="276.1" r="3" fill="#2471a3"/>
-<circle cx="228.9" cy="263.9" r="3" fill="#2471a3"/>
-<circle cx="339.0" cy="275.2" r="3" fill="#2471a3"/>
-<circle cx="410.3" cy="269.4" r="3" fill="#2471a3"/>
+<polyline points="65.1,288.8 70.6,273.8 80.2,271.8 96.1,271.4 119.5,258.4 150.4,276.1 187.3,263.9 271.0,275.2 325.2,269.4 415.6,275.3" fill="none" stroke="#2471a3" stroke-width="2"/>
+<circle cx="65.1" cy="288.8" r="3" fill="#2471a3"/>
+<circle cx="70.6" cy="273.8" r="3" fill="#2471a3"/>
+<circle cx="80.2" cy="271.8" r="3" fill="#2471a3"/>
+<circle cx="96.1" cy="271.4" r="3" fill="#2471a3"/>
+<circle cx="119.5" cy="258.4" r="3" fill="#2471a3"/>
+<circle cx="150.4" cy="276.1" r="3" fill="#2471a3"/>
+<circle cx="187.3" cy="263.9" r="3" fill="#2471a3"/>
+<circle cx="271.0" cy="275.2" r="3" fill="#2471a3"/>
+<circle cx="325.2" cy="269.4" r="3" fill="#2471a3"/>
+<circle cx="415.6" cy="275.3" r="3" fill="#2471a3"/>
 <text x="63" y="71" font-size="11" fill="#2471a3">WS MAUVE@256</text>
-<polyline points="68.3,118.3 75.4,118.0 88.1,117.7 109.0,118.0 139.8,117.8 180.5,117.3 228.9,116.9 339.0,117.5 410.3,117.8" fill="none" stroke="#1e8449" stroke-width="2"/>
-<circle cx="68.3" cy="118.3" r="3" fill="#1e8449"/>
-<circle cx="75.4" cy="118.0" r="3" fill="#1e8449"/>
-<circle cx="88.1" cy="117.7" r="3" fill="#1e8449"/>
-<circle cx="109.0" cy="118.0" r="3" fill="#1e8449"/>
-<circle cx="139.8" cy="117.8" r="3" fill="#1e8449"/>
-<circle cx="180.5" cy="117.3" r="3" fill="#1e8449"/>
-<circle cx="228.9" cy="116.9" r="3" fill="#1e8449"/>
-<circle cx="339.0" cy="117.5" r="3" fill="#1e8449"/>
-<circle cx="410.3" cy="117.8" r="3" fill="#1e8449"/>
+<polyline points="65.1,118.3 70.6,118.0 80.2,117.7 96.1,118.0 119.5,117.8 150.4,117.3 187.3,116.9 271.0,117.5 325.2,117.8 415.6,117.3" fill="none" stroke="#1e8449" stroke-width="2"/>
+<circle cx="65.1" cy="118.3" r="3" fill="#1e8449"/>
+<circle cx="70.6" cy="118.0" r="3" fill="#1e8449"/>
+<circle cx="80.2" cy="117.7" r="3" fill="#1e8449"/>
+<circle cx="96.1" cy="118.0" r="3" fill="#1e8449"/>
+<circle cx="119.5" cy="117.8" r="3" fill="#1e8449"/>
+<circle cx="150.4" cy="117.3" r="3" fill="#1e8449"/>
+<circle cx="187.3" cy="116.9" r="3" fill="#1e8449"/>
+<circle cx="271.0" cy="117.5" r="3" fill="#1e8449"/>
+<circle cx="325.2" cy="117.8" r="3" fill="#1e8449"/>
+<circle cx="415.6" cy="117.3" r="3" fill="#1e8449"/>
 <text x="63" y="85" font-size="11" fill="#1e8449">wiki R1</text>
 <text x="239" y="366" text-anchor="middle" font-size="11">NFE（log 轴）</text>
 <text x="17" y="31" font-size="11">分数</text>
-<text x="661" y="28" text-anchor="middle" font-size="15" font-weight="bold">时延 vs 粒度（0.50→12.2s，线性定律外推 52× 仍准）</text>
+<text x="661" y="28" text-anchor="middle" font-size="15" font-weight="bold">时延 vs 粒度（0.50→46s；线性定律 206× 外推误差 +1%）</text>
 <rect x="477.5" y="40" width="368" height="285" fill="none" stroke="#999"/>
-<text x="491" y="341" text-anchor="middle" font-size="10">70</text>
-<text x="531" y="341" text-anchor="middle" font-size="10">112</text>
-<text x="603" y="341" text-anchor="middle" font-size="10">256</text>
-<text x="651" y="341" text-anchor="middle" font-size="10">448</text>
-<text x="762" y="341" text-anchor="middle" font-size="10">1600</text>
-<text x="833" y="341" text-anchor="middle" font-size="10">3648</text>
+<text x="488" y="341" text-anchor="middle" font-size="10">70</text>
+<text x="573" y="341" text-anchor="middle" font-size="10">256</text>
+<text x="694" y="341" text-anchor="middle" font-size="10">1600</text>
+<text x="748" y="341" text-anchor="middle" font-size="10">3648</text>
+<text x="838" y="341" text-anchor="middle" font-size="10">14400</text>
 <text x="471.5" y="329" text-anchor="end" font-size="10">0</text>
 <line x1="477.5" y1="325" x2="845" y2="325" stroke="#eee"/>
-<text x="471.5" y="291" text-anchor="end" font-size="10">2</text>
-<line x1="477.5" y1="287" x2="845" y2="287" stroke="#eee"/>
-<text x="471.5" y="252" text-anchor="end" font-size="10">4</text>
-<line x1="477.5" y1="248" x2="845" y2="248" stroke="#eee"/>
-<text x="471.5" y="214" text-anchor="end" font-size="10">6</text>
-<line x1="477.5" y1="210" x2="845" y2="210" stroke="#eee"/>
-<text x="471.5" y="175" text-anchor="end" font-size="10">8</text>
-<line x1="477.5" y1="171" x2="845" y2="171" stroke="#eee"/>
-<text x="471.5" y="137" text-anchor="end" font-size="10">10</text>
-<line x1="477.5" y1="133" x2="845" y2="133" stroke="#eee"/>
-<text x="471.5" y="98" text-anchor="end" font-size="10">12</text>
-<line x1="477.5" y1="94" x2="845" y2="94" stroke="#eee"/>
-<polyline points="490.8,315.4 497.9,315.2 510.6,314.6 531.5,313.3 562.3,310.3 603.0,304.2 651.4,292.9 761.5,215.6 832.8,89.8" fill="none" stroke="#c0392b" stroke-width="2"/>
-<circle cx="490.8" cy="315.4" r="3" fill="#c0392b"/>
-<circle cx="497.9" cy="315.2" r="3" fill="#c0392b"/>
-<circle cx="510.6" cy="314.6" r="3" fill="#c0392b"/>
-<circle cx="531.5" cy="313.3" r="3" fill="#c0392b"/>
-<circle cx="562.3" cy="310.3" r="3" fill="#c0392b"/>
-<circle cx="603.0" cy="304.2" r="3" fill="#c0392b"/>
-<circle cx="651.4" cy="292.9" r="3" fill="#c0392b"/>
-<circle cx="761.5" cy="215.6" r="3" fill="#c0392b"/>
-<circle cx="832.8" cy="89.8" r="3" fill="#c0392b"/>
+<text x="471.5" y="282" text-anchor="end" font-size="10">9</text>
+<line x1="477.5" y1="278" x2="845" y2="278" stroke="#eee"/>
+<text x="471.5" y="235" text-anchor="end" font-size="10">18</text>
+<line x1="477.5" y1="231" x2="845" y2="231" stroke="#eee"/>
+<text x="471.5" y="188" text-anchor="end" font-size="10">27</text>
+<line x1="477.5" y1="184" x2="845" y2="184" stroke="#eee"/>
+<text x="471.5" y="142" text-anchor="end" font-size="10">36</text>
+<line x1="477.5" y1="138" x2="845" y2="138" stroke="#eee"/>
+<text x="471.5" y="95" text-anchor="end" font-size="10">45</text>
+<line x1="477.5" y1="91" x2="845" y2="91" stroke="#eee"/>
+<polyline points="487.6,322.4 493.1,322.3 502.7,322.2 518.6,321.8 542.0,321.0 572.9,319.4 609.8,316.3 693.5,295.4 747.7,261.3 838.1,85.4" fill="none" stroke="#c0392b" stroke-width="2"/>
+<circle cx="487.6" cy="322.4" r="3" fill="#c0392b"/>
+<circle cx="493.1" cy="322.3" r="3" fill="#c0392b"/>
+<circle cx="502.7" cy="322.2" r="3" fill="#c0392b"/>
+<circle cx="518.6" cy="321.8" r="3" fill="#c0392b"/>
+<circle cx="542.0" cy="321.0" r="3" fill="#c0392b"/>
+<circle cx="572.9" cy="319.4" r="3" fill="#c0392b"/>
+<circle cx="609.8" cy="316.3" r="3" fill="#c0392b"/>
+<circle cx="693.5" cy="295.4" r="3" fill="#c0392b"/>
+<circle cx="747.7" cy="261.3" r="3" fill="#c0392b"/>
+<circle cx="838.1" cy="85.4" r="3" fill="#c0392b"/>
 <text x="485.5" y="57" font-size="11" fill="#c0392b">时延 s/样本（batch=1）</text>
 <text x="661" y="366" text-anchor="middle" font-size="11">NFE（log 轴）</text>
 <text x="439.5" y="31" font-size="11">s/样本</text>
