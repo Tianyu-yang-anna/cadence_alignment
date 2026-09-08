@@ -109,10 +109,14 @@ def main():
             for j in range(B):
                 per_scale = [float(ce[j, starts[k]:starts[k + 1]].mean())
                              for k in range(len(scales))]
+                # per-scale x per-segment matrix: is difficulty segment-uniform?
+                per_seg = [[float(ce[j, starts[k]:starts[k + 1], s].mean())
+                            for s in range(ce.shape[-1])]
+                           for k in range(len(scales))]
                 total = float(sum(p * l * ce.shape[-1]
                                   for p, l in zip(per_scale, scales)))
                 rows.append({"window": s0 + j, "per_scale_bits": per_scale,
-                             "total_bits": total})
+                             "per_scale_seg": per_seg, "total_bits": total})
             if (s0 // args.batch) % 10 == 0:
                 print(f"[psbits] {s0 + B}/{n_win}", flush=True)
     Path(args.out).write_text(json.dumps(
