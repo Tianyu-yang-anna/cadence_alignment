@@ -4,6 +4,14 @@
 #      CONFIG (default configs/planner_owt.yaml), BENCHMARKS, N, TEMP, TOPP, CFG, TAG,
 #      NSHARDS (generate_prefix.py fan-out width, default = visible GPUs).
 PLANNER_FULL="${PLANNER_FULL:-planner_owt}"
+# prefix-family defaults: the platform allows only 9 user env keys (a 10th
+# fails the run in ~1s with no logs — measured twice, 2026-09-08), so the
+# three values every prefix-planner job repeats become defaults, not keys
+if [ "${GEN_SCRIPT:-}" = "generate_prefix.py" ]; then
+  TOK_FULL="${TOK_FULL:-vqvae_owt2_1024_pqsh}"
+  CONFIG="${CONFIG:-configs/planner_prefix_owt2_pqsh.yaml}"
+  DATA_NAME="${DATA_NAME:-owt2_gpt2}"
+fi
 TOK_FULL="${TOK_FULL:-vqvae_owt_gpt2hybrid}"
 CONFIG="${CONFIG:-configs/planner_owt.yaml}"
 BENCHMARKS="${BENCHMARKS:-tinystories lm1b wikipedia wikisource}"
