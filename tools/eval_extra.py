@@ -111,8 +111,10 @@ def main():
 
     from transformers import GPT2LMHeadModel, GPT2TokenizerFast
     tok = GPT2TokenizerFast.from_pretrained(args.judge)
+    # bf16 only where it's hardware-native; CPU emulation is ~100x slower
+    dtype = torch.bfloat16 if device.type == "cuda" else torch.float32
     model = GPT2LMHeadModel.from_pretrained(
-        args.judge, torch_dtype=torch.bfloat16).to(device).eval()
+        args.judge, torch_dtype=dtype).to(device).eval()
 
     report = {"gen_file": str(args.gen), "n": len(rows),
               "judge": args.judge, "protocol": "extra-metrics v1"}
