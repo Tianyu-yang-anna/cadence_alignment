@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="420" font-family="Helvetica,Arial">
+<text x="250" y="24" text-anchor="middle" font-size="14" font-weight="bold">逐尺度学到的难度（bits/slot ± 95% CI，n=2048）</text>
+<rect x="62" y="50" width="377" height="308" fill="none" stroke="#999"/>
+<line x1="62" y1="358" x2="439" y2="358" stroke="#eee"/>
+<text x="56" y="362" text-anchor="end" font-size="10">0</text>
+<line x1="62" y1="314" x2="439" y2="314" stroke="#eee"/>
+<text x="56" y="318" text-anchor="end" font-size="10">1</text>
+<line x1="62" y1="271" x2="439" y2="271" stroke="#eee"/>
+<text x="56" y="275" text-anchor="end" font-size="10">2</text>
+<line x1="62" y1="227" x2="439" y2="227" stroke="#eee"/>
+<text x="56" y="231" text-anchor="end" font-size="10">3</text>
+<line x1="62" y1="183" x2="439" y2="183" stroke="#eee"/>
+<text x="56" y="187" text-anchor="end" font-size="10">4</text>
+<line x1="62" y1="140" x2="439" y2="140" stroke="#eee"/>
+<text x="56" y="144" text-anchor="end" font-size="10">5</text>
+<line x1="62" y1="96" x2="439" y2="96" stroke="#eee"/>
+<text x="56" y="100" text-anchor="end" font-size="10">6</text>
+<polygon points="62.0,294.3 99.7,216.2 137.4,167.4 175.1,137.7 212.8,118.1 250.5,109.2 288.2,114.8 325.9,134.7 363.6,163.6 401.3,220.8 439.0,274.7 439.0,274.9 401.3,221.7 363.6,164.6 325.9,135.4 288.2,115.4 250.5,109.6 212.8,118.7 175.1,139.0 137.4,169.7 99.7,219.5 62.0,296.4" fill="#c0392b" opacity="0.25"/>
+<polyline points="62.0,295.3 99.7,217.8 137.4,168.5 175.1,138.4 212.8,118.4 250.5,109.4 288.2,115.1 325.9,135.0 363.6,164.1 401.3,221.2 439.0,274.8" fill="none" stroke="#c0392b" stroke-width="2"/>
+<circle cx="62.0" cy="295.3" r="3" fill="#c0392b"/>
+<text x="62.0" y="374" text-anchor="middle" font-size="9">q1</text>
+<circle cx="99.7" cy="217.8" r="3" fill="#c0392b"/>
+<text x="99.7" y="374" text-anchor="middle" font-size="9">q2</text>
+<circle cx="137.4" cy="168.5" r="3" fill="#c0392b"/>
+<text x="137.4" y="374" text-anchor="middle" font-size="9">q4</text>
+<circle cx="175.1" cy="138.4" r="3" fill="#c0392b"/>
+<text x="175.1" y="374" text-anchor="middle" font-size="9">q8</text>
+<circle cx="212.8" cy="118.4" r="3" fill="#c0392b"/>
+<text x="212.8" y="374" text-anchor="middle" font-size="9">q16</text>
+<circle cx="250.5" cy="109.4" r="3" fill="#c0392b"/>
+<text x="250.5" y="374" text-anchor="middle" font-size="9">q32</text>
+<circle cx="288.2" cy="115.1" r="3" fill="#c0392b"/>
+<text x="288.2" y="374" text-anchor="middle" font-size="9">q64</text>
+<circle cx="325.9" cy="135.0" r="3" fill="#c0392b"/>
+<text x="325.9" y="374" text-anchor="middle" font-size="9">q128</text>
+<circle cx="363.6" cy="164.1" r="3" fill="#c0392b"/>
+<text x="363.6" y="374" text-anchor="middle" font-size="9">q256</text>
+<circle cx="401.3" cy="221.2" r="3" fill="#c0392b"/>
+<text x="401.3" y="374" text-anchor="middle" font-size="9">q512</text>
+<circle cx="439.0" cy="274.8" r="3" fill="#c0392b"/>
+<text x="439.0" y="374" text-anchor="middle" font-size="9">q1024</text>
+<text x="250.5" y="99.4" text-anchor="middle" font-size="10" fill="#c0392b">峰 q32=5.69</text>
+<text x="690" y="24" text-anchor="middle" font-size="14" font-weight="bold">尺度 × 段 难度矩阵（bits/slot）</text>
+<rect x="501.0" y="50.0" width="94.2" height="28.0" fill="rgb(255,235,205)" stroke="#fff"/>
+<text x="548.1" y="67.4" text-anchor="middle" font-size="10">1.66</text>
+<rect x="595.2" y="50.0" width="94.2" height="28.0" fill="rgb(255,249,219)" stroke="#fff"/>
+<text x="642.4" y="67.4" text-anchor="middle" font-size="10">1.26</text>
+<rect x="689.5" y="50.0" width="94.2" height="28.0" fill="rgb(255,255,225)" stroke="#fff"/>
+<text x="736.6" y="67.4" text-anchor="middle" font-size="10">1.10</text>
+<rect x="783.8" y="50.0" width="94.2" height="28.0" fill="rgb(255,233,203)" stroke="#fff"/>
+<text x="830.9" y="67.4" text-anchor="middle" font-size="10">1.72</text>
+<text x="495.0" y="67.4" text-anchor="end" font-size="9">q1</text>
+<rect x="501.0" y="78.0" width="94.2" height="28.0" fill="rgb(255,178,148)" stroke="#fff"/>
+<text x="548.1" y="95.4" text-anchor="middle" font-size="10">3.30</text>
+<rect x="595.2" y="78.0" width="94.2" height="28.0" fill="rgb(255,188,158)" stroke="#fff"/>
+<text x="642.4" y="95.4" text-anchor="middle" font-size="10">3.01</text>
+<rect x="689.5" y="78.0" width="94.2" height="28.0" fill="rgb(255,182,152)" stroke="#fff"/>
+<text x="736.6" y="95.4" text-anchor="middle" font-size="10">3.19</text>
+<rect x="783.8" y="78.0" width="94.2" height="28.0" fill="rgb(255,176,146)" stroke="#fff"/>
+<text x="830.9" y="95.4" text-anchor="middle" font-size="10">3.34</text>
+<text x="495.0" y="95.4" text-anchor="end" font-size="9">q2</text>
+<rect x="501.0" y="106.0" width="94.2" height="28.0" fill="rgb(255,141,111)" stroke="#fff"/>
+<text x="548.1" y="123.4" text-anchor="middle" font-size="10">4.37</text>
+<rect x="595.2" y="106.0" width="94.2" height="28.0" fill="rgb(255,146,116)" stroke="#fff"/>
+<text x="642.4" y="123.4" text-anchor="middle" font-size="10">4.23</text>
+<rect x="689.5" y="106.0" width="94.2" height="28.0" fill="rgb(255,140,110)" stroke="#fff"/>
+<text x="736.6" y="123.4" text-anchor="middle" font-size="10">4.39</text>
+<rect x="783.8" y="106.0" width="94.2" height="28.0" fill="rgb(255,141,111)" stroke="#fff"/>
+<text x="830.9" y="123.4" text-anchor="middle" font-size="10">4.36</text>
+<text x="495.0" y="123.4" text-anchor="end" font-size="9">q4</text>
+<rect x="501.0" y="134.0" width="94.2" height="28.0" fill="rgb(255,118,88)" stroke="#fff"/>
+<text x="548.1" y="151.4" text-anchor="middle" font-size="10">5.02</text>
+<rect x="595.2" y="134.0" width="94.2" height="28.0" fill="rgb(255,117,87)" stroke="#fff"/>
+<text x="642.4" y="151.4" text-anchor="middle" font-size="10">5.06</text>
+<rect x="689.5" y="134.0" width="94.2" height="28.0" fill="rgb(255,118,88)" stroke="#fff"/>
+<text x="736.6" y="151.4" text-anchor="middle" font-size="10">5.03</text>
+<rect x="783.8" y="134.0" width="94.2" height="28.0" fill="rgb(255,119,89)" stroke="#fff"/>
+<text x="830.9" y="151.4" text-anchor="middle" font-size="10">5.00</text>
+<text x="495.0" y="151.4" text-anchor="end" font-size="9">q8</text>
+<rect x="501.0" y="162.0" width="94.2" height="28.0" fill="rgb(255,103,73)" stroke="#fff"/>
+<text x="548.1" y="179.4" text-anchor="middle" font-size="10">5.47</text>
+<rect x="595.2" y="162.0" width="94.2" height="28.0" fill="rgb(255,101,71)" stroke="#fff"/>
+<text x="642.4" y="179.4" text-anchor="middle" font-size="10">5.50</text>
+<rect x="689.5" y="162.0" width="94.2" height="28.0" fill="rgb(255,102,72)" stroke="#fff"/>
+<text x="736.6" y="179.4" text-anchor="middle" font-size="10">5.48</text>
+<rect x="783.8" y="162.0" width="94.2" height="28.0" fill="rgb(255,102,72)" stroke="#fff"/>
+<text x="830.9" y="179.4" text-anchor="middle" font-size="10">5.49</text>
+<text x="495.0" y="179.4" text-anchor="end" font-size="9">q16</text>
+<rect x="501.0" y="190.0" width="94.2" height="28.0" fill="rgb(255,96,66)" stroke="#fff"/>
+<text x="548.1" y="207.4" text-anchor="middle" font-size="10">5.67</text>
+<rect x="595.2" y="190.0" width="94.2" height="28.0" fill="rgb(255,95,65)" stroke="#fff"/>
+<text x="642.4" y="207.4" text-anchor="middle" font-size="10">5.70</text>
+<rect x="689.5" y="190.0" width="94.2" height="28.0" fill="rgb(255,95,65)" stroke="#fff"/>
+<text x="736.6" y="207.4" text-anchor="middle" font-size="10">5.69</text>
+<rect x="783.8" y="190.0" width="94.2" height="28.0" fill="rgb(255,95,65)" stroke="#fff"/>
+<text x="830.9" y="207.4" text-anchor="middle" font-size="10">5.69</text>
+<text x="495.0" y="207.4" text-anchor="end" font-size="9">q32</text>
+<rect x="501.0" y="218.0" width="94.2" height="28.0" fill="rgb(255,101,71)" stroke="#fff"/>
+<text x="548.1" y="235.4" text-anchor="middle" font-size="10">5.53</text>
+<rect x="595.2" y="218.0" width="94.2" height="28.0" fill="rgb(255,99,69)" stroke="#fff"/>
+<text x="642.4" y="235.4" text-anchor="middle" font-size="10">5.58</text>
+<rect x="689.5" y="218.0" width="94.2" height="28.0" fill="rgb(255,98,68)" stroke="#fff"/>
+<text x="736.6" y="235.4" text-anchor="middle" font-size="10">5.60</text>
+<rect x="783.8" y="218.0" width="94.2" height="28.0" fill="rgb(255,100,70)" stroke="#fff"/>
+<text x="830.9" y="235.4" text-anchor="middle" font-size="10">5.53</text>
+<text x="495.0" y="235.4" text-anchor="end" font-size="9">q64</text>
+<rect x="501.0" y="246.0" width="94.2" height="28.0" fill="rgb(255,116,86)" stroke="#fff"/>
+<text x="548.1" y="263.4" text-anchor="middle" font-size="10">5.07</text>
+<rect x="595.2" y="246.0" width="94.2" height="28.0" fill="rgb(255,115,85)" stroke="#fff"/>
+<text x="642.4" y="263.4" text-anchor="middle" font-size="10">5.12</text>
+<rect x="689.5" y="246.0" width="94.2" height="28.0" fill="rgb(255,115,85)" stroke="#fff"/>
+<text x="736.6" y="263.4" text-anchor="middle" font-size="10">5.12</text>
+<rect x="783.8" y="246.0" width="94.2" height="28.0" fill="rgb(255,115,85)" stroke="#fff"/>
+<text x="830.9" y="263.4" text-anchor="middle" font-size="10">5.10</text>
+<text x="495.0" y="263.4" text-anchor="end" font-size="9">q128</text>
+<rect x="501.0" y="274.0" width="94.2" height="28.0" fill="rgb(255,139,109)" stroke="#fff"/>
+<text x="548.1" y="291.4" text-anchor="middle" font-size="10">4.43</text>
+<rect x="595.2" y="274.0" width="94.2" height="28.0" fill="rgb(255,139,109)" stroke="#fff"/>
+<text x="642.4" y="291.4" text-anchor="middle" font-size="10">4.43</text>
+<rect x="689.5" y="274.0" width="94.2" height="28.0" fill="rgb(255,139,109)" stroke="#fff"/>
+<text x="736.6" y="291.4" text-anchor="middle" font-size="10">4.44</text>
+<rect x="783.8" y="274.0" width="94.2" height="28.0" fill="rgb(255,138,108)" stroke="#fff"/>
+<text x="830.9" y="291.4" text-anchor="middle" font-size="10">4.46</text>
+<text x="495.0" y="291.4" text-anchor="end" font-size="9">q256</text>
+<rect x="501.0" y="302.0" width="94.2" height="28.0" fill="rgb(255,184,154)" stroke="#fff"/>
+<text x="548.1" y="319.4" text-anchor="middle" font-size="10">3.12</text>
+<rect x="595.2" y="302.0" width="94.2" height="28.0" fill="rgb(255,184,154)" stroke="#fff"/>
+<text x="642.4" y="319.4" text-anchor="middle" font-size="10">3.11</text>
+<rect x="689.5" y="302.0" width="94.2" height="28.0" fill="rgb(255,184,154)" stroke="#fff"/>
+<text x="736.6" y="319.4" text-anchor="middle" font-size="10">3.13</text>
+<rect x="783.8" y="302.0" width="94.2" height="28.0" fill="rgb(255,183,153)" stroke="#fff"/>
+<text x="830.9" y="319.4" text-anchor="middle" font-size="10">3.15</text>
+<text x="495.0" y="319.4" text-anchor="end" font-size="9">q512</text>
+<rect x="501.0" y="330.0" width="94.2" height="28.0" fill="rgb(255,226,196)" stroke="#fff"/>
+<text x="548.1" y="347.4" text-anchor="middle" font-size="10">1.91</text>
+<rect x="595.2" y="330.0" width="94.2" height="28.0" fill="rgb(255,226,196)" stroke="#fff"/>
+<text x="642.4" y="347.4" text-anchor="middle" font-size="10">1.90</text>
+<rect x="689.5" y="330.0" width="94.2" height="28.0" fill="rgb(255,227,197)" stroke="#fff"/>
+<text x="736.6" y="347.4" text-anchor="middle" font-size="10">1.90</text>
+<rect x="783.8" y="330.0" width="94.2" height="28.0" fill="rgb(255,227,197)" stroke="#fff"/>
+<text x="830.9" y="347.4" text-anchor="middle" font-size="10">1.90</text>
+<text x="495.0" y="347.4" text-anchor="end" font-size="9">q1024</text>
+<text x="548.1" y="374" text-anchor="middle" font-size="10">seg0</text>
+<text x="642.4" y="374" text-anchor="middle" font-size="10">seg1</text>
+<text x="736.6" y="374" text-anchor="middle" font-size="10">seg2</text>
+<text x="830.9" y="374" text-anchor="middle" font-size="10">seg3</text>
+</svg>
