@@ -172,6 +172,9 @@ def main():
                     choices=["logitnormal", "uniform"])
     ap.add_argument("--smoke", action="store_true",
                     help="relax the 2B gradient-token assert (CPU smoke only)")
+    ap.add_argument("--budget_tokens", type=int, default=0,
+                    help="declared gradient-token budget when not "
+                         "strict-2B (12792627200 for the 12.8B tier)")
     args = ap.parse_args()
 
     rank, world, local_rank = setup_distributed()
@@ -196,9 +199,12 @@ def main():
 
     seq_len = cfg.model.seq_len
     grad_tokens = cfg.train.max_steps * cfg.train.batch_size * seq_len
-    assert args.smoke or grad_tokens == BUDGET_TOKENS, (
+    # the guard keeps budget changes DECLARED: default is the strict-2B
+    # number; other tiers (e.g. the 12.8B full-data tier) must state theirs
+    budget = args.budget_tokens or BUDGET_TOKENS
+    assert args.smoke or grad_tokens == budget, (
         f"budget mismatch: {cfg.train.max_steps} x {cfg.train.batch_size} x "
-        f"{seq_len} = {grad_tokens} != {BUDGET_TOKENS} (7630 x 256 x 1024)")
+        f"{seq_len} = {grad_tokens} != {budget} (declare --budget_tokens)")
 
     vae_run_dir = args.vae_run_dir or cfg.vae.run_dir
     vae, vae_ckpt = load_frozen_textvae(
