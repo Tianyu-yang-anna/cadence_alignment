@@ -545,6 +545,15 @@ class PrefixVARPlanner(nn.Module):
         if cond_drop is None and self.training and self.cond_drop_p > 0:
             cond_drop = torch.rand(prefix_e.shape[0],
                                    device=prefix_e.device) < self.cond_drop_p
+        elif cond_drop is None and self.training:
+            # cond_drop_p == 0 (no-CFG training): the learned null_prefix
+            # would never enter the graph and DDP's reducer
+            # (find_unused_parameters=False) errors on step 2. Run the
+            # substitution with an all-False mask instead — torch.where keeps
+            # the parameter in the graph with an exactly-zero gradient (the
+            # same trick the all-False visible mask uses, commit 361317d).
+            cond_drop = torch.zeros(prefix_e.shape[0], dtype=torch.bool,
+                                    device=prefix_e.device)
         if cond_drop is not None:
             prefix_e, prefix_mask = self._apply_cond_drop(
                 prefix_e, prefix_mask, cond_drop)

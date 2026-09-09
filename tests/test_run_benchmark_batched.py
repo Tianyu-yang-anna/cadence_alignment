@@ -58,3 +58,28 @@ def test_batched_rejects_chained_rows(tmp_path):
         assert "chained" in str(e)
     else:
         raise AssertionError("chained row must be rejected")
+
+
+def test_no_cfg_training_keeps_null_prefix_in_graph():
+    """cond_drop_p=0 + training mode: null_prefix must still receive a (zero)
+    gradient, or multi-GPU DDP dies on step 2 (measured: b12ncf/b12ncfa25,
+    2026-09-09)."""
+    import torch
+    from models.prefix_planner import PrefixVARPlanner
+
+    scales = [1, 2, 4]
+    S, N, d_seg = 4, 8, 4          # PQ: 4 segments x 8-entry books, d_code 16
+    books = torch.randn(len(scales), S, N, d_seg)
+    p = PrefixVARPlanner(scales=scales, seq_len=4, codebooks=books,
+                         d_model=32, n_layers=1, n_heads=2, ffn_mult=2,
+                         cond_drop_p=0.0)
+    p.train()
+    B, L = 2, sum(scales)
+    codes = torch.zeros(B, L, S, dtype=torch.long)
+    prefix_e = torch.randn(B, 4, S * d_seg)
+    logits = p(codes, prefix_e,
+               prefix_mask=torch.ones(B, 4, dtype=torch.bool))
+    logits.float().sum().backward()
+    g = p.null_prefix.grad
+    assert g is not None, "null_prefix missing from the autograd graph"
+    assert float(g.abs().max()) == 0.0, "all-False drop must not perturb"
