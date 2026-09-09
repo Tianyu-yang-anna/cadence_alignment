@@ -176,12 +176,19 @@ def main():
 4. 时长耦合常数（EMA/warmup/LR 日程）在改预算时必须重标（ELF EMA 教训）。
 5. NFE ≠ 墙钟时延：序列长度、batch 口径、launch 开销三者都要披露。
 
-## 6. 在飞（本文档随落地重生成）
-- α=0.25 全量链（基座 36000 步收尾中 → mg 6400 → M1/M8 双支采样）→ 12.8B 档
-  将补全 {token, α}×{M1, M8} 2×2。
-- BD3-LM 12.8B（48800 步，~30h，lightning 分窗续训）→ 12.8B 档 baseline。
-- 粒度谱 sweep（b12s2e8 十格 C×K，NFE 70→448，wiki+WS n=1000 逐行配对 +
-  同口径时延）→ mentor 的 adaptive 粒度假设检验。
+## 6. 专题结论页（图+完整表）
+- **粒度谱**（docs/reports/CADENCE_粒度谱结论.md）：NFE 70→14400（206×，
+  含 token=1 与完全 AR 化）质量水平线、时延 0.50→46s 线性（外推 206× 误差
+  +1%）→ adaptive 粒度选择关闭，运行点 C1K1@70；组件分解 VAR 19.4ms/次 vs
+  细带 MaskGIT 3.14ms/次（汇率 1:6.2，VAR 是时延地板，注册格占 79%）。
+- **自适应证据**（docs/reports/CADENCE_自适应分配证据.md）：固定网格、内容
+  自适应信息分配（份额-难度指纹 q512 r=+0.83 / q32 r=−0.83，n=2048）；
+  尺度难度 3× 驼峰铁证（配对 t=1356、100% 同向）；段间难度仅最粗尺度分化。
+- **α 判词（12.8B）**：重加权把收益从词面换成流利度（判官 PPL 全族最低
+  274/254/129/733、熵保持）；R1/R2 增益不随数据缩放存活。
+
+## 7. 在飞（本文档随落地重生成）
+- BD3-LM 12.8B（48800 步，lightning 分窗续训）→ 12.8B 档 baseline 补位。
 """]
     Path("docs/reports/CADENCE_全结果汇总.md").write_text("\n".join(out) + "\n")
     print(f"wrote docs/reports/CADENCE_全结果汇总.md ({len(out)} blocks)")
