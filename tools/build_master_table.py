@@ -384,6 +384,7 @@ EXTRA_ROWS = [
     ("ELF pre2", "benchgen_elf_owt2_t5_pre2", "finalELFP2"),
     ("SSD-LM（退化锚）", "benchgen_ssdlm_owt2", "S10"),
     ("CADENCE 2B 2D-M8 C2K2", "benchgen_planner_prefix_owt2_pqsh_b2s2eM8", "finalM8"),
+    ("CADENCE 12.8B α=0.25 M1", "benchgen_planner_prefix_owt2_pqsh_b12a25sg1", "final12A25"),
     ("ELF-2B @22fwd", "benchgen_elf_owt2_t5_ours", "finalELFOURS22"),
     ("ELF-12.8B @128fwd", "benchgen_elf_owt2_t5_ours12", "finalELF12"),
     ("ELF-12.8B @22fwd（全对齐）", "benchgen_elf_owt2_t5_ours12", "finalELF12N22"),

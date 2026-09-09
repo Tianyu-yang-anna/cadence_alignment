@@ -54,6 +54,7 @@ TIER12 = [
     ("★全量 2D M8 C2K2（词面旗舰）", f"{PFX}_b12s2e8", "_final12E88", "22+88"),
     ("全量段轴 M8", f"{PFX}_b12sg8", "_final12SG8", "22+88"),
     ("全量段轴 M1（数据单变量锚点）", f"{PFX}_b12sg1", "_final12SG1", "22+88"),
+    ("★全量 α=0.25 M1（流利度侧：判官 PPL 全族最低）", f"{PFX}_b12a25sg1", "_final12A25", "22+88"),
     ("ELF-12.8B @128fwd（本配方）", "benchgen_elf_owt2_t5_ours12", "_finalELF12", "128"),
     ("ELF-12.8B @22fwd（全对齐格）", "benchgen_elf_owt2_t5_ours12", "_finalELF12N22", "22"),
 ]
