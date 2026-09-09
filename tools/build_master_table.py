@@ -129,6 +129,12 @@ ROWS = [
      "α 全面 R1/R2 增益在 12.8B 不复现，损失重加权是小数据杠杆**；12.8B "
      "注册点维持 2D-M8/段轴-M8"),
 
+    ("cadence12", "BD3-LM 12.8B（baseline，本配方 1024 NFE）",
+     "benchgen_bd3lm_owt2_12", "_final12", 1024, 0,
+     "数据缩放对 BD3 的 MAUVE 增益巨大（wiki 11.39→18.45、WS 7.67→20.88），"
+     "12.8B 档 MAUVE 反超 CADENCE（words 仍被压 R1 −5.1/R2 −1.9）——"
+     "12.8B 三分格局：CADENCE 词面+时延（快 10×）、BD3 MAUVE、ELF 流利度"),
+
     # ---- ELF baseline (external pretrained encoder; footnoted) ----------
     ("elf", "ELF pre2（预训练 T5 enc + 重标 EMA，ODE64 CFG2）",
      "benchgen_elf_owt2_t5_pre2", "_finalELFP2", 128, 0,
@@ -385,6 +391,7 @@ EXTRA_ROWS = [
     ("SSD-LM（退化锚）", "benchgen_ssdlm_owt2", "S10"),
     ("CADENCE 2B 2D-M8 C2K2", "benchgen_planner_prefix_owt2_pqsh_b2s2eM8", "finalM8"),
     ("CADENCE 12.8B α=0.25 M1", "benchgen_planner_prefix_owt2_pqsh_b12a25sg1", "final12A25"),
+    ("BD3-LM 12.8B", "benchgen_bd3lm_owt2_12", "final12"),
     ("ELF-2B @22fwd", "benchgen_elf_owt2_t5_ours", "finalELFOURS22"),
     ("ELF-12.8B @128fwd", "benchgen_elf_owt2_t5_ours12", "finalELF12"),
     ("ELF-12.8B @22fwd（全对齐）", "benchgen_elf_owt2_t5_ours12", "finalELF12N22"),

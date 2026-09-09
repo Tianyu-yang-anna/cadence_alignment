@@ -1,0 +1,5 @@
+# supplement 5: BD3-LM 12.8B test cells
+benchgen_bd3lm_owt2_12/gens_wikipedia_final12.jsonl
+benchgen_bd3lm_owt2_12/gens_wikisource_final12.jsonl
+benchgen_bd3lm_owt2_12/gens_tinystories_final12.jsonl
+benchgen_bd3lm_owt2_12/gens_lm1b_final12.jsonl
