@@ -1,0 +1,14 @@
+{
+  "gen_file": "/tmp/cadence_local/evalx/benchgen_planner_prefix_owt2_pqsh_b12a25sg1_gens_lm1b_final12A25.jsonl",
+  "n": 1000,
+  "judge": "gpt2-large",
+  "protocol": "extra-metrics v1",
+  "gen_ppl": 733.2700892454519,
+  "gen_ppl_seqmean": 1406.8489696044442,
+  "gen_tokens": 20617,
+  "ref_gen_ppl": 45.05917759975559,
+  "ref_gen_ppl_seqmean": 76.05707773822907,
+  "unigram_entropy": 10.342085372147537,
+  "ref_unigram_entropy": 10.063046210828563,
+  "mauve_1024": 0.006396480625614879
+}
