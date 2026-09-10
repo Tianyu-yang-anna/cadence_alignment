@@ -153,6 +153,14 @@ ROWS = [
      "7.50>5.75）→ 注册值维持 w=7；**两 sel 集同向也不保 test 方向**"
      "（协议教训最强实例）"),
 
+    ("cadence12", "全量·2D M8 CFG+α=0.25（实验1：加权×CFG 组合格）",
+     "benchgen_planner_prefix_owt2_pqsh_b12a252e8", "_final12CA", 22, 88,
+     "2D 家族 2×2 的最后一格：有 CFG 时 α 词面无增益（R1 −0.4/−0.7/−0.4）、"
+     "R2 微涨、TS R2 5.44=2D 家族最高、MAUVE 两集劈叉——**α×CFG 替代关系在 "
+     "2D 链上复现**（α 效应：无 CFG +1.05 R1 / 有 CFG −0.40）。注册点维持 "
+     "CFG+token（b12s2e8）。sel 上 WS MAUVE 34.76 未迁移（test 7.25），"
+     "sel 单格 MAUVE 海市蜃楼再 +1"),
+
     ("cadence12", "BD3-LM 12.8B（baseline，本配方 1024 NFE）",
      "benchgen_bd3lm_owt2_12", "_final12", 1024, 0,
      "数据缩放对 BD3 的 MAUVE 增益巨大（wiki 11.39→18.45、WS 7.67→20.88），"
@@ -448,6 +456,7 @@ EXTRA_ROWS = [
     ("BD3-LM 12.8B", "benchgen_bd3lm_owt2_12", "final12"),
     ("CADENCE 12.8B 无CFG", "benchgen_planner_prefix_owt2_pqsh_b12ncf2e8", "final12NCF"),
     ("CADENCE 12.8B 同ckpt关CFG", "benchgen_planner_prefix_owt2_pqsh_b12s2e8", "final12CFGoffCtl"),
+    ("CADENCE 12.8B CFG+α", "benchgen_planner_prefix_owt2_pqsh_b12a252e8", "final12CA"),
     ("CADENCE 12.8B 无CFG+α", "benchgen_planner_prefix_owt2_pqsh_b12ncfa25e8", "final12NCFA"),
     ("ELF-2B @22fwd", "benchgen_elf_owt2_t5_ours", "finalELFOURS22"),
     ("ELF-12.8B @128fwd", "benchgen_elf_owt2_t5_ours12", "finalELF12"),
