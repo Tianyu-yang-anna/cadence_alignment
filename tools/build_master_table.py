@@ -140,6 +140,19 @@ ROWS = [
      "R2 +0.5、wiki MAUVE +2.1、1BW R1 10.50=家族新高）——**重加权与 CFG "
      "部分替代**：有 CFG 时词面增益消失、无 CFG 时显著；仍追不回 CFG 版"),
 
+    ("cadence12", "全量·2D M8 同 ckpt 关 CFG（受控推理消融，NFE 11+44）",
+     "benchgen_planner_prefix_owt2_pqsh_b12s2e8", "_final12CFGoffCtl", 11, 44,
+     "**Controlled inference-time CFG ablation**（审计断言除 cfg_schedule 全"
+     "字段一致）：同 ckpt 关 CFG = R1 −4.2/−3.2/−7.2（1BW 平），且与 full-"
+     "recipe no-CFG 逐格重合（差 ≤0.1）——CFG 的全部价值在推理侧引导，"
+     "cond_drop 训练零成本、重训重调买不回任何东西；1BW 是唯一 CFG 免费档。"
+     "实测时延 0.30 vs 0.55 s/样本"),
+    ("cadence12", "全量·2D M8 推理 w=5（CFG 系数扫描注册枪）",
+     "benchgen_planner_prefix_owt2_pqsh_b12s2e8", "_final12W5", 22, 88,
+     "sel 两集一致 +5 MAUVE 的 w=5 在 test 劈叉（wiki 11.70<13.99、WS "
+     "7.50>5.75）→ 注册值维持 w=7；**两 sel 集同向也不保 test 方向**"
+     "（协议教训最强实例）"),
+
     ("cadence12", "BD3-LM 12.8B（baseline，本配方 1024 NFE）",
      "benchgen_bd3lm_owt2_12", "_final12", 1024, 0,
      "数据缩放对 BD3 的 MAUVE 增益巨大（wiki 11.39→18.45、WS 7.67→20.88），"
@@ -428,6 +441,7 @@ EXTRA_ROWS = [
     ("CADENCE 12.8B α=0.25 M1", "benchgen_planner_prefix_owt2_pqsh_b12a25sg1", "final12A25"),
     ("BD3-LM 12.8B", "benchgen_bd3lm_owt2_12", "final12"),
     ("CADENCE 12.8B 无CFG", "benchgen_planner_prefix_owt2_pqsh_b12ncf2e8", "final12NCF"),
+    ("CADENCE 12.8B 同ckpt关CFG", "benchgen_planner_prefix_owt2_pqsh_b12s2e8", "final12CFGoffCtl"),
     ("CADENCE 12.8B 无CFG+α", "benchgen_planner_prefix_owt2_pqsh_b12ncfa25e8", "final12NCFA"),
     ("ELF-2B @22fwd", "benchgen_elf_owt2_t5_ours", "finalELFOURS22"),
     ("ELF-12.8B @128fwd", "benchgen_elf_owt2_t5_ours12", "finalELF12"),
