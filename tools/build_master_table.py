@@ -204,6 +204,12 @@ ROWS = [
      "退化：高频功能词汤，distinct-2 0.886、prompt bigram 复制率仅 6.8%，MAUVE 地板"),
     ("degenerate", "隐扩散 CADENCE-LDM 64 步",
      "benchgen_ldiff_owt2_pqsh", "_D64", 64, 0, "退化：词沙拉 + token 复读"),
+    ("degenerate", "CMLM-12.8B T=10（12.8B 档）", "benchgen_cmlm_owt2_12",
+     "_T10", 10, 0,
+     "数据放大 6.4× 救不了 CMLM，反而塌向重复化（d2 0.886→0.22）——"
+     "退化形态从高熵噪声换成低多样性重复"),
+    ("degenerate", "CMLM-12.8B T=22（12.8B 档）", "benchgen_cmlm_owt2_12",
+     "_T22", 22, 0, "同上（d2 0.15）"),
     ("degenerate", "CMLM T=64", "benchgen_cmlm_owt2", "_T64", 64, 0, "退化"),
     ("degenerate", "CMLM T=22", "benchgen_cmlm_owt2", "_T22", 22, 0, "退化"),
     ("degenerate", "CMLM T=10", "benchgen_cmlm_owt2", "_T10", 10, 0, "退化"),

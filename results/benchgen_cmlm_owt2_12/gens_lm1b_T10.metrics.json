@@ -1,0 +1,12 @@
+{
+  "gen_file": "/tmp/cadence_local/results/benchgen_cmlm_owt2_12/gens_lm1b_T10.jsonl",
+  "n": 1000,
+  "rouge1": 0.10085591398588302,
+  "rouge2": 0.006323205181622143,
+  "rougeL": 0.0931572869612618,
+  "distinct1": 0.19566273842789456,
+  "distinct2": 0.4856422196352348,
+  "ref_distinct2": 0.824236160454751,
+  "bertscore_f1": 0.7975791692733765,
+  "mauve": 0.0047359491202551545
+}
