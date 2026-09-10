@@ -1,0 +1,12 @@
+{
+  "gen_file": "/tmp/cadence_local/results/benchgen_textldm_dit_owt2_12/gens_wikisource_finalTLDM12.jsonl",
+  "n": 1000,
+  "rouge1": 0.2991316418443386,
+  "rouge2": 0.038248795055398306,
+  "rougeL": 0.16011882077555056,
+  "distinct1": 0.17323909966307144,
+  "distinct2": 0.660832715542287,
+  "ref_distinct2": 0.6081017451762207,
+  "bertscore_f1": 0.7723959684371948,
+  "mauve": 0.010583055823252708
+}

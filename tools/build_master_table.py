@@ -204,6 +204,13 @@ ROWS = [
      "退化：高频功能词汤，distinct-2 0.886、prompt bigram 复制率仅 6.8%，MAUVE 地板"),
     ("degenerate", "隐扩散 CADENCE-LDM 64 步",
      "benchgen_ldiff_owt2_pqsh", "_D64", 64, 0, "退化：词沙拉 + token 复读"),
+    ("cadence12", "TextLDM-12.8B（w=7, 50 步；12.8B 档 baseline）",
+     "benchgen_textldm_dit_owt2_12", "_finalTLDM12", 50, 0,
+     "**2B 的完全退化被数据放大部分解除**：R1 10.61→25.16、R2 0.23→3.39、"
+     "d2 0.985→0.65（词碎片→可读文本），MAUVE 仍 1.41（分布保真未达流畅"
+     "系统档）。『自含空间连续隐扩散不成立』确认为 2B 预算界定的结论——"
+     "词面随数据复活、保真仍缺；VAE 侧预算 39.3B 不变"),
+
     ("degenerate", "SSD-LM-12.8B S=10（12.8B 档）", "benchgen_ssdlm_owt2_12",
      "_S10", 10, 0,
      "数据放大 6.4× 几乎零变化（d2 0.33→0.36，MAUVE 仍地板）——SSD-LM 的"
