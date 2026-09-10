@@ -204,6 +204,10 @@ ROWS = [
      "退化：高频功能词汤，distinct-2 0.886、prompt bigram 复制率仅 6.8%，MAUVE 地板"),
     ("degenerate", "隐扩散 CADENCE-LDM 64 步",
      "benchgen_ldiff_owt2_pqsh", "_D64", 64, 0, "退化：词沙拉 + token 复读"),
+    ("degenerate", "SSD-LM-12.8B S=10（12.8B 档）", "benchgen_ssdlm_owt2_12",
+     "_S10", 10, 0,
+     "数据放大 6.4× 几乎零变化（d2 0.33→0.36，MAUVE 仍地板）——SSD-LM 的"
+     "低熵词汤是机制性退化，不是数据量问题"),
     ("degenerate", "CMLM-12.8B T=10（12.8B 档）", "benchgen_cmlm_owt2_12",
      "_T10", 10, 0,
      "数据放大 6.4× 救不了 CMLM，反而塌向重复化（d2 0.886→0.22）——"
