@@ -129,6 +129,17 @@ ROWS = [
      "α 全面 R1/R2 增益在 12.8B 不复现，损失重加权是小数据杠杆**；12.8B "
      "注册点维持 2D-M8/段轴-M8"),
 
+    ("cadence12", "全量·2D M8 无 CFG（单分支，NFE 11+44）",
+     "benchgen_planner_prefix_owt2_pqsh_b12ncf2e8", "_final12NCF", 11, 44,
+     "CFG 单变量消融（全链 cond_drop_p=0 从 0 重训，p5hot）：对有 CFG 版 "
+     "R1 −4.2/−3.1/−7.2、R2 −1.5、wiki MAUVE −5.1 —— **12.8B 下 CFG 仍是"
+     "硬杠杆**；NFE/时延减半买不回质量，注册配置维持 CFG-on"),
+    ("cadence12", "全量·2D M8 无 CFG + α=0.25（NFE 11+44）",
+     "benchgen_planner_prefix_owt2_pqsh_b12ncfa25e8", "_final12NCFA", 11, 44,
+     "无 CFG 环境下 α 加权价值回归（对无 CFG 素链 R1 +1.05/+1.4/+2.3、"
+     "R2 +0.5、wiki MAUVE +2.1、1BW R1 10.50=家族新高）——**重加权与 CFG "
+     "部分替代**：有 CFG 时词面增益消失、无 CFG 时显著；仍追不回 CFG 版"),
+
     ("cadence12", "BD3-LM 12.8B（baseline，本配方 1024 NFE）",
      "benchgen_bd3lm_owt2_12", "_final12", 1024, 0,
      "数据缩放对 BD3 的 MAUVE 增益巨大（wiki 11.39→18.45、WS 7.67→20.88），"
@@ -392,6 +403,8 @@ EXTRA_ROWS = [
     ("CADENCE 2B 2D-M8 C2K2", "benchgen_planner_prefix_owt2_pqsh_b2s2eM8", "finalM8"),
     ("CADENCE 12.8B α=0.25 M1", "benchgen_planner_prefix_owt2_pqsh_b12a25sg1", "final12A25"),
     ("BD3-LM 12.8B", "benchgen_bd3lm_owt2_12", "final12"),
+    ("CADENCE 12.8B 无CFG", "benchgen_planner_prefix_owt2_pqsh_b12ncf2e8", "final12NCF"),
+    ("CADENCE 12.8B 无CFG+α", "benchgen_planner_prefix_owt2_pqsh_b12ncfa25e8", "final12NCFA"),
     ("ELF-2B @22fwd", "benchgen_elf_owt2_t5_ours", "finalELFOURS22"),
     ("ELF-12.8B @128fwd", "benchgen_elf_owt2_t5_ours12", "finalELF12"),
     ("ELF-12.8B @22fwd（全对齐）", "benchgen_elf_owt2_t5_ours12", "finalELF12N22"),
