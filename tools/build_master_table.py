@@ -231,6 +231,12 @@ ROWS = [
      "空间性质决定，MLM 预测空间(ELF) > 自学 VAE+REPA(半可用) > 冻结重建 "
      "PQ(数据放大也救不了)。CADENCE 用同一冻结 PQ 空间做离散 AR 却是词面"
      "旗舰——空间的正确用法是离散预测不是连续扩散"),
+    ("degenerate", "bd3lms-AR-12.8B（BD3 论文自带 AR 实现，12.8B 档）",
+     "benchgen_ar_owt2_12", "_final12b", 1024, 0,
+     "应用户要求加入：BD3 代码库 algo=ar 的 AR 参照，其默认采样（纯温度、无 "
+     "nucleus 调优）下输出弱（wiki 9.70/0.23）；BLOCK_SIZE 16/1024 两次逐位"
+     "相同=块参数与 AR 采样无关。与家族注册 AR 行（自研 arbase，独立实现+"
+     "调优采样）分列，无 2B 对应行"),
     ("degenerate", "SSD-LM-12.8B S=10（12.8B 档）", "benchgen_ssdlm_owt2_12",
      "_S10", 10, 0,
      "数据放大 6.4× 几乎零变化（d2 0.33→0.36，MAUVE 仍地板）——SSD-LM 的"
