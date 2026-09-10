@@ -161,6 +161,12 @@ ROWS = [
      "CFG+token（b12s2e8）。sel 上 WS MAUVE 34.76 未迁移（test 7.25），"
      "sel 单格 MAUVE 海市蜃楼再 +1"),
 
+    ("cadence12", "MDLM 12.8B（baseline，本配方 1024 NFE）",
+     "benchgen_mdlm_owt2_12", "_final12", 1024, 0,
+     "数据放大近零收益（wiki 18.35/1.25/9.38 vs 2B 18.52/1.25/7.84）——"
+     "与 BD3（MAUVE +7~13）/CADENCE（R1 +5.5）对照：**块级顺序结构吃数据，"
+     "全并行吸收态不吃**"),
+
     ("cadence12", "BD3-LM 12.8B（baseline，本配方 1024 NFE）",
      "benchgen_bd3lm_owt2_12", "_final12", 1024, 0,
      "数据缩放对 BD3 的 MAUVE 增益巨大（wiki 11.39→18.45、WS 7.67→20.88），"
