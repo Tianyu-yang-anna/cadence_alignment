@@ -512,7 +512,7 @@ def load(results: Path, run_dir: str, tag: str, bench: str):
         return None
     d = json.loads(p.read_text())
     return {"r1": d["rouge1"] * 100, "r2": d["rouge2"] * 100,
-            "mauve": d["mauve"] * 100, "n": d.get("n"),
+            "mauve": d["mauve"], "n": d.get("n"),
             "distinct2": d.get("distinct2"), "bertscore": d.get("bertscore_f1"),
             "path": str(p.relative_to(results.parent))}
 
@@ -563,7 +563,7 @@ def main():
             cells = []
             for b in BENCHES:
                 r = idx.get((label, b))
-                cells.append(f"{r['r1']:.2f}/{r['r2']:.2f}/{r['mauve']/100:.3f}"
+                cells.append(f"{r['r1']:.2f}/{r['r2']:.2f}/{r['mauve']:.3f}"
                              if r else "—")
             nfe = f"{nfe_b}" + (f" (+{nfe_s})" if nfe_s else "")
             out.append(f"| {label} | {nfe} | " + " | ".join(cells) + " |")
@@ -587,7 +587,7 @@ def main():
             got = []
             for b in ("sel_wikipedia", "sel_wikisource"):
                 m = load(results, run_dir, tag, b)
-                got.append(f"{m['r1']:.2f}/{m['r2']:.2f}/{m['mauve']/100:.3f}"
+                got.append(f"{m['r1']:.2f}/{m['r2']:.2f}/{m['mauve']:.3f}"
                            if m else "—")
                 if m:
                     flat.append({"group": "sel", "label": f"{title} :: {label}",
