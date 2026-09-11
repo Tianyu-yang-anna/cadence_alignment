@@ -87,8 +87,8 @@ def svg(rows, out="docs/figures/granularity_spectrum.svg"):
     body = ['<svg xmlns="http://www.w3.org/2000/svg" '
             f'width="{W}" height="{H}" font-family="Helvetica,Arial">']
     body += panel(PAD, None,
-                  [("wiki MAUVE@256", best("wikipedia", 1)),
-                   ("WS MAUVE@256", best("wikisource", 1)),
+                  [("wiki MAUVE@256 (×100)", best("wikipedia", 1)),
+                   ("WS MAUVE@256 (×100)", best("wikisource", 1)),
                    ("wiki R1", best("wikipedia", 0))],
                   "质量 vs 粒度（NFE 70→14400=206× 全程平坦）", "分数", 0, 35)
     body += panel(2 * PAD + PW, None, [("时延 s/样本（batch=1）", lat)],

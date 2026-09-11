@@ -163,7 +163,7 @@ ROWS = [
 
     ("cadence12", "MDLM 12.8B（baseline，本配方 1024 NFE）",
      "benchgen_mdlm_owt2_12", "_final12", 1024, 0,
-     "数据放大近零收益（wiki 18.35/1.25/9.38 vs 2B 18.52/1.25/7.84）——"
+     "数据放大近零收益（wiki 18.35/1.25/0.094 vs 2B 18.52/1.25/0.078）——"
      "与 BD3（MAUVE +7~13）/CADENCE（R1 +5.5）对照：**块级顺序结构吃数据，"
      "全并行吸收态不吃**"),
 
@@ -192,7 +192,7 @@ ROWS = [
      "R2 5.25→6.24）。与 CADENCE 全量档同预算层，但 NFE 仍 ~6×"),
     ("elf", "ELF-12.8B @22 前向（完全同层格：同语料+同侧预算+同生成预算+对齐 NFE）",
      "benchgen_elf_owt2_t5_ours12", "_finalELF12N22", 22, 0,
-     "**全对齐终点**：对 CADENCE 全量 2D M8（29.00/4.43/13.99）——R1 反而 "
+     "**全对齐终点**：对 CADENCE 全量 2D M8（29.00/4.43/0.140）——R1 反而 "
      "CADENCE 高 0.5、TS R1 高 2.6；ELF 剩 R2 +0.2 与 wiki/WS MAUVE "
      "+3.8/+3.6。原生配方下 25 分的 MAUVE 鸿沟在全对齐后收缩到 ~4 分："
      "ELF 的支配性优势按序分解为 NFE（大头）、数据档（中）、机制（residual "
@@ -327,8 +327,8 @@ SEL_SWEEPS = [
     ("多掩码纯段轴（`b2sgM4`/`b2sgM16`，seg:all:4，对 `b2sg` 单变量 = M）",
      "benchgen_planner_prefix_owt2_pqsh_b2sgM4",
      [("M=4 seg:all:4（88）", "_segall4")],
-     "M=1 基准（b2sg）= wiki 22.33/2.33/22.89、WS 28.62/3.65/20.42；"
-     "M=16（b2sgM16/_segall4）= wiki 22.58/2.30/12.42、WS 28.72/3.68/21.04。"
+     "M=1 基准（b2sg）= wiki 22.33/2.33/0.229、WS 28.62/3.65/0.204；"
+     "M=16（b2sgM16/_segall4）= wiki 22.58/2.30/0.124、WS 28.72/3.68/0.210。"
      "R1/R2 全平、MAUVE 两集不同向 → 纯段轴主线对多掩码**无可测收益**"
      "（监督已饱和；与 2D 臂的正响应构成机制对照：多掩码=恢复被摊薄的监督效率，"
      "非普适增益）。"),
@@ -377,7 +377,7 @@ SEL_SWEEPS = [
     ("★全量 12.8B 档·α=0.25 链（`b12a25sg1`/`b12a25sg8`）",
      "benchgen_planner_prefix_owt2_pqsh_b12a25sg1",
      [("α M=1 seg:all:4", "_segall4")],
-     "α-M8（b12a25sg8/_segall4）= wiki 27.29/4.13/21.84、WS 33.37/5.81/22.69。"
+     "α-M8（b12a25sg8/_segall4）= wiki 27.29/4.13/0.218、WS 33.37/5.81/0.227。"
      "支内按规则选 M1（wiki MAUVE 带内→R1 平→WS MAUVE 27.60>22.69）。"),
     ("★全量 12.8B 档·α=0.25 M8（`b12a25sg8`）",
      "benchgen_planner_prefix_owt2_pqsh_b12a25sg8",
