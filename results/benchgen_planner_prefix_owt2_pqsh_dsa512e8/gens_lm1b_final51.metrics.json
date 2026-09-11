@@ -1,0 +1,12 @@
+{
+  "gen_file": "/tmp/cadence_local/benchgen/gens_lm1b_final51.jsonl",
+  "n": 1000,
+  "rouge1": 0.10232772177477746,
+  "rouge2": 0.005133105783792201,
+  "rougeL": 0.08749591629432672,
+  "distinct1": 0.38183362660032766,
+  "distinct2": 0.8663523028228151,
+  "ref_distinct2": 0.824236160454751,
+  "bertscore_f1": 0.8187722563743591,
+  "mauve": 0.005279119747056915
+}
