@@ -476,12 +476,12 @@ def emit_extra_tables(results: Path, out: list):
         return json.loads(p.read_text()) if p.exists() else None
     out += ["---", "", "# 事后新指标（2026-09-08 协议变更，gpt2-large 判官，"
             "对注册 gens 重打分不重生成；R1/R2 降为辅助指标）", ""]
-    out += ["## MAUVE@1024（×100；对照 @256 主表：全场塌到地板 = 评满全长后"
+    out += ["## MAUVE@1024（原始值 [0,1]；对照 @256 主表：全场塌到地板 = 评满全长后"
             "没有系统能匹配参考分布，256 截断承担了区分度）", "",
             "| 系统 | " + " | ".join(BENCH_LABEL[b] for b in BENCHES) + " |",
             "|---|" + "---|" * len(BENCHES)]
     for lb, d, t in EXTRA_ROWS:
-        cells = [(f"{r['mauve_1024']*100:.2f}" if (r := ld(d, b, t)) else "—")
+        cells = [(f"{r['mauve_1024']:.4f}" if (r := ld(d, b, t)) else "—")
                  for b in BENCHES]
         out.append(f"| {lb} | " + " | ".join(cells) + " |")
     out += ["", "## Gen-PPL（corpus 级，括号=逐句均值；**必须与熵并读**——"
@@ -545,7 +545,9 @@ def main():
     out = ["# 主表（脚本生成，勿手改）",
            "",
            "由 `tools/build_master_table.py` 从 `results/benchgen_*/` 的原始 "
-           "`*.metrics.json` 重建。每格 = R1/R2/MAUVE ×100，n=1000（test 一枪）。",
+           "`*.metrics.json` 重建。每格 = R1/R2（×100 百分比）/ MAUVE（原始值，"
+           "理论区间 [0,1]），n=1000（test 一枪）。行内脚注中的历史 MAUVE 数字"
+           "沿用旧 ×100 约定。",
            "除标注外全部严格 2B（7630×256×1024 梯度 token）、同数据、同 GPT-2 BPE、",
            "同 12L×768 主干。NFE = 每生成 1024 token 的 backbone 前向次数（CFG 双分支计入）。",
            ""]
@@ -561,7 +563,7 @@ def main():
             cells = []
             for b in BENCHES:
                 r = idx.get((label, b))
-                cells.append(f"{r['r1']:.2f}/{r['r2']:.2f}/{r['mauve']:.2f}"
+                cells.append(f"{r['r1']:.2f}/{r['r2']:.2f}/{r['mauve']/100:.3f}"
                              if r else "—")
             nfe = f"{nfe_b}" + (f" (+{nfe_s})" if nfe_s else "")
             out.append(f"| {label} | {nfe} | " + " | ".join(cells) + " |")
@@ -585,7 +587,7 @@ def main():
             got = []
             for b in ("sel_wikipedia", "sel_wikisource"):
                 m = load(results, run_dir, tag, b)
-                got.append(f"{m['r1']:.2f}/{m['r2']:.2f}/{m['mauve']:.2f}"
+                got.append(f"{m['r1']:.2f}/{m['r2']:.2f}/{m['mauve']/100:.3f}"
                            if m else "—")
                 if m:
                     flat.append({"group": "sel", "label": f"{title} :: {label}",

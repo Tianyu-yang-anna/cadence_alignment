@@ -27,7 +27,7 @@ def x(d, b, t):
 def rrm(d, t, b):
     r = m(d, b, t)
     return (f"{r['rouge1']*100:.2f}/{r['rouge2']*100:.2f}/"
-            f"{r['mauve']*100:.2f}" if r else "—")
+            f"{r['mauve']:.3f}" if r else "—")
 
 
 PFX = "benchgen_planner_prefix_owt2_pqsh"
@@ -71,12 +71,12 @@ def allmetric_rows(rows, out):
                 out.append(f"| {name} | {nfe} | 缺 | | | | | | | |")
                 continue
             e = x(d, b, t[1:])
-            ex = (f"{e['mauve_1024']*100:.2f} | {e['gen_ppl']:.0f} | "
+            ex = (f"{e['mauve_1024']:.4f} | {e['gen_ppl']:.0f} | "
                   f"{e['unigram_entropy']:.2f}" if e else "— | — | —")
             out.append(
                 f"| {name} | {nfe} | {r['rouge1']*100:.2f}/{r['rouge2']*100:.2f}"
                 f" | {r['rougeL']*100:.2f} | {r['bertscore_f1']*100:.2f}"
-                f" | {r['distinct2']:.2f} | {r['mauve']*100:.2f} | {ex} |")
+                f" | {r['distinct2']:.2f} | {r['mauve']:.3f} | {ex} |")
         e0 = x("benchgen_bd3lm_owt2", b, "final")
         r0 = m("benchgen_bd3lm_owt2", b, "final")
         if e0 and r0:
@@ -98,9 +98,9 @@ def main():
   （48800 步 ≈1 epoch，独立档，两档永不并读）。侧预算 39.3B 双方逐字节同额。
 - NFE：每 1024 token 的 backbone 前向（CFG 双分支计入）；`22+88` 中 88 是
   4.16M 小采样头。
-- **数字单位：所有 R1/R2/RL/BERT/MAUVE 均为原始值 ×100**（与 TextLDM 论文
-  报数约定一致；MAUVE 原始理论区间 [0,1]，表中 "13.99" = 0.1399，全库 848
-  个结果文件实测原始最大值 0.999，无越界）。
+- **数字单位（2026-09-11 起）**：R1/R2/RL/BERT = ×100 百分比；**MAUVE =
+  原始值（理论区间 [0,1]，全库 848 文件实测最大 0.999，无越界）**。
+  历史叙述文档中的 MAUVE 数字沿用旧 ×100 约定并已加注说明。
 - 指标：MAUVE@256 / Gen-PPL（gpt2-large 判官，prompt 条件）/ unigram 熵为主，
   R1/R2/RL/BERT/d2 为辅（2026-09-08 协议变更，事后调整已披露）；MAUVE@1024
   为全长上界（全场塌地板：256 截断承担全部区分度）；latency 为单卡 H100
@@ -190,8 +190,30 @@ def main():
 - **α 判词（12.8B）**：重加权把收益从词面换成流利度（判官 PPL 全族最低
   274/254/129/733、熵保持）；R1/R2 增益不随数据缩放存活。
 
-## 7. 在飞（本文档随落地重生成）
-- BD3-LM 12.8B（48800 步，lightning 分窗续训）→ 12.8B 档 baseline 补位。
+## 7. CFG 专题（2026-09-10/11，三项收官）
+- **Controlled inference-time CFG ablation**（审计断言仅 cfg_schedule 不同）：
+  同 ckpt 关 CFG = R1 −4.2/−3.2/−7.2（1BW 平），且与 full-recipe no-CFG
+  逐格重合（差 ≤0.1）——**CFG 的全部价值在推理侧引导**，cond_drop 训练
+  零成本、重训重调买不回；1BW 是唯一 CFG 免费档（短 prompt 无物可导）。
+  时延 0.30 vs 0.55 s/样本（NFE 11+44 vs 22+88）。
+- **推理 CFG 系数扫描**（w∈{1,3,5,7}）：词面随 w 单调升；w=5 的 sel 两集一致
+  MAUVE 优势在 test 劈叉 → 注册 w=7 不变（"两 sel 集同向也不保 test"最强案例）。
+- **2D 家族 2×2**（{CFG,无CFG}×{token,α}）：α×CFG 替代交互复现（α 对 wiki
+  R1：无 CFG +1.05 / 有 CFG −0.40）；注册点维持 CFG+token（b12s2e8）。
+
+## 8. 12.8B baseline 数据缩放画像（全集收官，arbase 在训）
+- **吃数据**：BD3（MAUVE 0.114→0.185/0.077→0.209，反超 CADENCE 的 MAUVE）、
+  CADENCE（R1 +5.5）、TextLDM（词面复活 10.6→25.2，保真仍 0.014）。
+- **不吃数据**：MDLM（近零变化）、SSD-LM（机制性词汤零变化）、
+  ldiff/冻结 PQ 扩散（仍完全退化）、CMLM（退化换形态 d2 0.886→0.15）。
+- 机制读法：**块级顺序结构（BD3 块 AR、我们的粗→细）能把数据转化为分布
+  保真；全并行/词汤/错基底结构不能**。基底命题收束（MLM 预测空间 > 自学
+  VAE+REPA > 冻结重建 PQ）。
+- AR 双口径：bd3lms-ar（论文自带实现，默认采样弱，如实入表）+ arbase
+  （家族口径，训练中，落地后补全景终表）。
+
+## 9. 在飞（本文档随落地重生成）
+- arbase-12.8B（家族口径 AR，最后一行）→ test → 12.8B 全景终表。
 """]
     Path("docs/reports/CADENCE_全结果汇总.md").write_text("\n".join(out) + "\n")
     print(f"wrote docs/reports/CADENCE_全结果汇总.md ({len(out)} blocks)")
