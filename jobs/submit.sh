@@ -23,11 +23,12 @@ case "$GPU" in
   16xh100) GPUS=16; GPU_TYPE=GPU_8xH100 ;;   # 2 nodes
   32xh100) GPUS=32; GPU_TYPE=GPU_8xH100 ;;   # 4 nodes
   64xh100) GPUS=64; GPU_TYPE=GPU_8xH100 ;;   # 8 nodes
+  128xh100) GPUS=128; GPU_TYPE=GPU_8xH100 ;;  # 16 nodes
   # sgcli accepts only: h100_80gb | a10 | GPU_1xA10 | GPU_8xH100 | GPU_1xH100.
   # There is no H200 type here, and GPU_8xH100 is a single workspace-wide quota
   # pool (32 nodes) shared with other users — a submit can fail on quota even
   # when our own jobs hold only a few nodes.
-  *) echo "unknown gpu '$GPU' (1xh100|8xh100|16xh100|32xh100|64xh100)"; exit 1 ;;
+  *) echo "unknown gpu '$GPU' (1xh100|8xh100|16xh100|32xh100|64xh100|128xh100)"; exit 1 ;;
 esac
 
 NAME="cadence-$STAGE${SUFFIX:+-$SUFFIX}"
