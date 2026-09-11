@@ -2,12 +2,50 @@
   "setting": "2D M8 C2K2@88, CFG (cond_drop 0.1) + HMAR (interp alpha=0.25)",
   "note": "training-token scaling; OWT2 repeated epochs (12.8B unique). base val seg-bits + per-scale + full-chain test. 12.8B anchor = b12a25* alpha chain.",
   "points": [
-    {"tokens_B": 12.8, "epochs": 1, "base_run": "b12a25nd", "chain": "b12a252e8",
-     "val_seg_bits": 4.6409, "coarse_q1_32": 4.581, "fine_q128_1024": 4.509,
-     "test": {"wiki":"28.60/4.50/0.122","ws":"31.35/4.67/0.072","ts":"33.29/5.44/0.006","1bw":"9.87/0.48/0.006"}},
-    {"tokens_B": 25.6, "epochs": 2, "base_run": "dsa25", "chain": "dsa252e8",
-     "val_seg_bits": 4.5892, "coarse_q1_32": 4.571, "fine_q128_1024": 4.385,
-     "test": {"wiki":"28.71/4.61/0.152","ws":"31.12/4.72/0.098","ts":"33.24/5.77/0.007","1bw":"9.94/0.51/0.007"}}
+    {
+      "tokens_B": 12.8,
+      "epochs": 1,
+      "base_run": "b12a25nd",
+      "chain": "b12a252e8",
+      "val_seg_bits": 4.6409,
+      "coarse_q1_32": 4.581,
+      "fine_q128_1024": 4.509,
+      "test": {
+        "wiki": "28.60/4.50/0.122",
+        "ws": "31.35/4.67/0.072",
+        "ts": "33.29/5.44/0.006",
+        "1bw": "9.87/0.48/0.006"
+      }
+    },
+    {
+      "tokens_B": 25.6,
+      "epochs": 2,
+      "base_run": "dsa25",
+      "chain": "dsa252e8",
+      "val_seg_bits": 4.5892,
+      "coarse_q1_32": 4.571,
+      "fine_q128_1024": 4.385,
+      "test": {
+        "wiki": "28.71/4.61/0.152",
+        "ws": "31.12/4.72/0.098",
+        "ts": "33.24/5.77/0.007",
+        "1bw": "9.94/0.51/0.007"
+      }
+    },
+    {
+      "tokens_B": 51.2,
+      "epochs": 4,
+      "base_run": "dsa51b",
+      "chain": "dsa51 (mg 在跑)",
+      "val_seg_bits": 4.5547,
+      "coarse_q1_32": 4.567,
+      "fine_q128_1024": 4.3,
+      "test": "pending"
+    }
   ],
-  "pending": ["51.2B (dsa51)", "102.4B (dsa102)", "204.8B (dsa204)"]
+  "pending": [
+    "102.4B (dsa102b)",
+    "204.8B (dsa204b)"
+  ],
+  "per_scale_finding": "coarse(q1-32) flat from 12.8B (4.581->4.567, -0.014); fine(q128-1024) monotone (4.509->4.300, -0.209 = 15x). Data scaling routes almost entirely to fine-scale rendering; semantic planning saturates by ~12.8B."
 }
