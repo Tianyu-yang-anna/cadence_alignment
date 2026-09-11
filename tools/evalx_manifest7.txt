@@ -1,0 +1,5 @@
+# supplement 7: CFG+HMAR 2D chain (experiment 1)
+benchgen_planner_prefix_owt2_pqsh_b12a252e8/gens_wikipedia_final12CA.jsonl
+benchgen_planner_prefix_owt2_pqsh_b12a252e8/gens_wikisource_final12CA.jsonl
+benchgen_planner_prefix_owt2_pqsh_b12a252e8/gens_tinystories_final12CA.jsonl
+benchgen_planner_prefix_owt2_pqsh_b12a252e8/gens_lm1b_final12CA.jsonl
