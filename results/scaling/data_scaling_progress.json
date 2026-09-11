@@ -36,16 +36,22 @@
       "tokens_B": 51.2,
       "epochs": 4,
       "base_run": "dsa51b",
-      "chain": "dsa51 (mg 在跑)",
+      "chain": "dsa512e8",
       "val_seg_bits": 4.5547,
       "coarse_q1_32": 4.567,
       "fine_q128_1024": 4.3,
-      "test": "pending"
+      "test": {
+        "wiki": "29.06/4.82/0.195",
+        "ws": "31.26/4.90/0.091",
+        "ts": "33.68/5.74/0.007",
+        "1bw": "10.23/0.51/0.005"
+      }
     }
   ],
   "pending": [
     "102.4B (dsa102b)",
     "204.8B (dsa204b)"
   ],
-  "per_scale_finding": "coarse(q1-32) flat from 12.8B (4.581->4.567, -0.014); fine(q128-1024) monotone (4.509->4.300, -0.209 = 15x). Data scaling routes almost entirely to fine-scale rendering; semantic planning saturates by ~12.8B."
+  "per_scale_finding": "coarse(q1-32) flat from 12.8B (4.581->4.567, -0.014); fine(q128-1024) monotone (4.509->4.300, -0.209 = 15x). Data scaling routes almost entirely to fine-scale rendering; semantic planning saturates by ~12.8B.",
+  "quality_trend": "wiki R1 28.60->28.71->29.06, R2 4.50->4.61->4.82, MAUVE 0.122->0.152->0.195 (accelerating, not saturated at 51.2B/4ep). Implication: model-scaling budget should be >> 12.8B (>=50-100B)."
 }
