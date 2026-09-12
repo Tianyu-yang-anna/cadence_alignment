@@ -103,6 +103,15 @@
       "test_seg_bits": 3.581,
       "test_coarse_q1_32": 4.061,
       "test_fine_q128_1024": 2.549
+    },
+    {
+      "tokens_B": 102.4,
+      "base_run": "dsa102b",
+      "base_val_seg_bits": 4.5248,
+      "coarse_q1_32": 4.567,
+      "fine_q128_1024": 4.22,
+      "recipe": "CFG+HMAR",
+      "test": "pending"
     }
   ],
   "pending": [
