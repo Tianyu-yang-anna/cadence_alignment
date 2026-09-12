@@ -78,12 +78,18 @@
 <text x="942.7" y="267" text-anchor="middle" font-size="8">25.6</text>
 <text x="866" y="294" text-anchor="middle" font-size="9">training tokens (B, log)</text>
 <text x="692" y="28" font-size="9">score</text>
-<polyline points="885.4,74.2 942.7,73.5 1000.0,71.3" fill="none" stroke="#c0392b" stroke-width="1.8"/>
+<polyline points="732.0,76.4 770.8,79.1 828.1,79.5 885.4,74.2 942.7,73.5 1000.0,71.3" fill="none" stroke="#c0392b" stroke-width="1.8"/>
+<circle cx="732.0" cy="76.4" r="2.4" fill="#c0392b"/>
+<circle cx="770.8" cy="79.1" r="2.4" fill="#c0392b"/>
+<circle cx="828.1" cy="79.5" r="2.4" fill="#c0392b"/>
 <circle cx="885.4" cy="74.2" r="2.4" fill="#c0392b"/>
 <circle cx="942.7" cy="73.5" r="2.4" fill="#c0392b"/>
 <circle cx="1000.0" cy="71.3" r="2.4" fill="#c0392b"/>
 <text x="740" y="46" font-size="9" fill="#c0392b">R1 (/100)</text>
-<polyline points="885.4,177.3 942.7,158.5 1000.0,131.4" fill="none" stroke="#2471a3" stroke-width="1.8"/>
+<polyline points="732.0,186.7 770.8,192.4 828.1,174.2 885.4,177.3 942.7,158.5 1000.0,131.4" fill="none" stroke="#2471a3" stroke-width="1.8"/>
+<circle cx="732.0" cy="186.7" r="2.4" fill="#2471a3"/>
+<circle cx="770.8" cy="192.4" r="2.4" fill="#2471a3"/>
+<circle cx="828.1" cy="174.2" r="2.4" fill="#2471a3"/>
 <circle cx="885.4" cy="177.3" r="2.4" fill="#2471a3"/>
 <circle cx="942.7" cy="158.5" r="2.4" fill="#2471a3"/>
 <circle cx="1000.0" cy="131.4" r="2.4" fill="#2471a3"/>
