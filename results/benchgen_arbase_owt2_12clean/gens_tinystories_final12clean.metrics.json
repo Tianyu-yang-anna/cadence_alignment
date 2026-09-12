@@ -1,0 +1,12 @@
+{
+  "gen_file": "/tmp/cadence_local/results/benchgen_arbase_owt2_12clean/gens_tinystories_final12clean.jsonl",
+  "n": 1000,
+  "rouge1": 0.1713737380088281,
+  "rouge2": 0.008518779872772263,
+  "rougeL": 0.10049304024642695,
+  "distinct1": 0.27745826053193556,
+  "distinct2": 0.7378033801709738,
+  "ref_distinct2": 0.4462380099600128,
+  "bertscore_f1": 0.801030158996582,
+  "mauve": 0.005496833314442683
+}

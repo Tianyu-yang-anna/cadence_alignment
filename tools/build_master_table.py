@@ -245,6 +245,12 @@ ROWS = [
      "空间性质决定，MLM 预测空间(ELF) > 自学 VAE+REPA(半可用) > 冻结重建 "
      "PQ(数据放大也救不了)。CADENCE 用同一冻结 PQ 空间做离散 AR 却是词面"
      "旗舰——空间的正确用法是离散预测不是连续扩散"),
+    ("cadence12", "AR-12.8B（家族口径 arbase，干净目录重训）",
+     "benchgen_arbase_owt2_12clean", "_final12clean", 1024, 0,
+     "arbase 家族 AR 从零训 48800 步：生成质量反低于 2B（wiki R1 21.0→19.9、"
+     "MAUVE 0.119→0.056）——纯 AR 在此 pipeline 下 data 放大是负收益，与 MDLM "
+     "12.8B 近零收益一致。此前乱码版(17.43/1.09/0.029)是 checkpoint 目录污染，"
+     "已用独立目录 arclean 重训修正"),
     ("degenerate", "bd3lms-AR-12.8B（BD3 论文自带 AR 实现，12.8B 档）",
      "benchgen_ar_owt2_12", "_final12b", 1024, 0,
      "应用户要求加入：BD3 代码库 algo=ar 的 AR 参照，其默认采样（纯温度、无 "
