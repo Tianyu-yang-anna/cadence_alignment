@@ -129,7 +129,12 @@
       "coarse_q1_32": 4.631,
       "fine_q128_1024": 4.143,
       "recipe": "CFG+HMAR",
-      "test": "pending",
+      "test": {
+        "wiki": "29.31/5.03/0.161",
+        "ws": "31.58/5.25/0.108",
+        "ts": "34.60/6.15/0.006",
+        "1bw": "10.09/0.52/0.005"
+      },
       "note": "16 epoch: total val plateau since 100B; coarse REBOUNDS 4.567->4.631 (held-out overfit) while fine still drops 4.220->4.143 — repeated-data saturation knee.",
       "test_seg_bits": 3.434,
       "test_coarse_q1_32": 4.009,
