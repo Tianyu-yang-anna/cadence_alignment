@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1020" height="300" font-family="Helvetica,Arial">
+<svg xmlns="http://www.w3.org/2000/svg" width="1360" height="300" font-family="Helvetica,Arial">
 <text x="186" y="18" text-anchor="middle" font-size="12" font-weight="bold">A. loss vs tokens</text>
 <rect x="52" y="34" width="268" height="220" fill="none" stroke="#888"/>
 <line x1="52" y1="254.0" x2="320" y2="254.0" stroke="#eee"/>
@@ -112,4 +112,53 @@
 <circle cx="959.9" cy="144.6" r="2.4" fill="#2471a3"/>
 <circle cx="1000.0" cy="152.8" r="2.4" fill="#2471a3"/>
 <text x="740" y="59" font-size="9" fill="#2471a3">MAUVE</text>
+<text x="1206" y="18" text-anchor="middle" font-size="12" font-weight="bold">D. judge Gen-PPL (log)</text>
+<rect x="1072" y="34" width="268" height="220" fill="none" stroke="#888"/>
+<line x1="1072" y1="217.3" x2="1340" y2="217.3" stroke="#eee"/>
+<text x="1067" y="220.3" text-anchor="end" font-size="9">2</text>
+<line x1="1072" y1="162.3" x2="1340" y2="162.3" stroke="#eee"/>
+<text x="1067" y="165.3" text-anchor="end" font-size="9">2.3</text>
+<line x1="1072" y1="125.7" x2="1340" y2="125.7" stroke="#eee"/>
+<text x="1067" y="128.7" text-anchor="end" font-size="9">2.5</text>
+<line x1="1072" y1="89.0" x2="1340" y2="89.0" stroke="#eee"/>
+<text x="1067" y="92.0" text-anchor="end" font-size="9">2.7</text>
+<line x1="1072" y1="34.0" x2="1340" y2="34.0" stroke="#eee"/>
+<text x="1067" y="37.0" text-anchor="end" font-size="9">3</text>
+<text x="1072.0" y="267" text-anchor="middle" font-size="8">2</text>
+<text x="1139.3" y="267" text-anchor="middle" font-size="8">6.4</text>
+<text x="1219.6" y="267" text-anchor="middle" font-size="8">25.6</text>
+<text x="1299.9" y="267" text-anchor="middle" font-size="8">102.4</text>
+<text x="1340.0" y="267" text-anchor="middle" font-size="8">204.8</text>
+<text x="1206" y="294" text-anchor="middle" font-size="9">training tokens (B, log)</text>
+<text x="1032" y="28" font-size="9">log10 PPL</text>
+<polyline points="1072.0,126.1 1099.2,118.1 1139.3,127.4 1179.5,143.2 1219.6,150.1 1259.7,151.5 1299.9,161.7 1340.0,167.8" fill="none" stroke="#c0392b" stroke-width="1.8"/>
+<circle cx="1072.0" cy="126.1" r="2.4" fill="#c0392b"/>
+<circle cx="1099.2" cy="118.1" r="2.4" fill="#c0392b"/>
+<circle cx="1139.3" cy="127.4" r="2.4" fill="#c0392b"/>
+<circle cx="1179.5" cy="143.2" r="2.4" fill="#c0392b"/>
+<circle cx="1219.6" cy="150.1" r="2.4" fill="#c0392b"/>
+<circle cx="1259.7" cy="151.5" r="2.4" fill="#c0392b"/>
+<circle cx="1299.9" cy="161.7" r="2.4" fill="#c0392b"/>
+<circle cx="1340.0" cy="167.8" r="2.4" fill="#c0392b"/>
+<text x="1080" y="46" font-size="9" fill="#c0392b">wiki</text>
+<polyline points="1072.0,141.6 1099.2,139.9 1139.3,141.3 1179.5,148.9 1219.6,155.9 1259.7,155.3 1299.9,164.3 1340.0,170.4" fill="none" stroke="#2471a3" stroke-width="1.8"/>
+<circle cx="1072.0" cy="141.6" r="2.4" fill="#2471a3"/>
+<circle cx="1099.2" cy="139.9" r="2.4" fill="#2471a3"/>
+<circle cx="1139.3" cy="141.3" r="2.4" fill="#2471a3"/>
+<circle cx="1179.5" cy="148.9" r="2.4" fill="#2471a3"/>
+<circle cx="1219.6" cy="155.9" r="2.4" fill="#2471a3"/>
+<circle cx="1259.7" cy="155.3" r="2.4" fill="#2471a3"/>
+<circle cx="1299.9" cy="164.3" r="2.4" fill="#2471a3"/>
+<circle cx="1340.0" cy="170.4" r="2.4" fill="#2471a3"/>
+<text x="1080" y="59" font-size="9" fill="#2471a3">ws</text>
+<polyline points="1072.0,188.1 1099.2,188.4 1139.3,196.1 1179.5,202.7 1219.6,210.8 1259.7,215.5 1299.9,220.1 1340.0,221.8" fill="none" stroke="#1e8449" stroke-width="1.8"/>
+<circle cx="1072.0" cy="188.1" r="2.4" fill="#1e8449"/>
+<circle cx="1099.2" cy="188.4" r="2.4" fill="#1e8449"/>
+<circle cx="1139.3" cy="196.1" r="2.4" fill="#1e8449"/>
+<circle cx="1179.5" cy="202.7" r="2.4" fill="#1e8449"/>
+<circle cx="1219.6" cy="210.8" r="2.4" fill="#1e8449"/>
+<circle cx="1259.7" cy="215.5" r="2.4" fill="#1e8449"/>
+<circle cx="1299.9" cy="220.1" r="2.4" fill="#1e8449"/>
+<circle cx="1340.0" cy="221.8" r="2.4" fill="#1e8449"/>
+<text x="1080" y="72" font-size="9" fill="#1e8449">ts</text>
 </svg>

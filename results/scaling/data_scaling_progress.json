@@ -16,7 +16,41 @@
       },
       "test_seg_bits": 4.465,
       "test_coarse_q1_32": 4.195,
-      "test_fine_q128_1024": 4.606
+      "test_fine_q128_1024": 4.606,
+      "extra": {
+        "wiki": {
+          "gen_ppl": 314.6611849124595,
+          "gen_ppl_seqmean": 388.62766370657084,
+          "unigram_entropy": 10.955929782577073,
+          "ref_gen_ppl": 19.97647541005174,
+          "ref_unigram_entropy": 11.336859044144957,
+          "mauve_1024": 0.007366444977470916
+        },
+        "ws": {
+          "gen_ppl": 258.8221924939976,
+          "gen_ppl_seqmean": 374.6209468381694,
+          "unigram_entropy": 10.295601668564137,
+          "ref_gen_ppl": 19.499693767639172,
+          "ref_unigram_entropy": 10.433135066583553,
+          "mauve_1024": 0.008518253049908319
+        },
+        "ts": {
+          "gen_ppl": 144.36129475749502,
+          "gen_ppl_seqmean": 161.04282352285566,
+          "unigram_entropy": 8.810458872251145,
+          "ref_gen_ppl": 7.175437437909364,
+          "ref_unigram_entropy": 8.66335053323845,
+          "mauve_1024": 0.004900362480195727
+        },
+        "1bw": {
+          "gen_ppl": 794.4831955128149,
+          "gen_ppl_seqmean": 1470.8772630511655,
+          "unigram_entropy": 10.19440809255471,
+          "ref_gen_ppl": 45.05917759975559,
+          "ref_unigram_entropy": 10.063046210828563,
+          "mauve_1024": 0.005591441498575158
+        }
+      }
     },
     {
       "tokens_B": 3.2,
@@ -32,7 +66,41 @@
       },
       "test_seg_bits": 4.411,
       "test_coarse_q1_32": 4.191,
-      "test_fine_q128_1024": 4.463
+      "test_fine_q128_1024": 4.463,
+      "extra": {
+        "wiki": {
+          "gen_ppl": 347.73301087384135,
+          "gen_ppl_seqmean": 434.18026368075357,
+          "unigram_entropy": 11.002735738807731,
+          "ref_gen_ppl": 19.97647541005174,
+          "ref_unigram_entropy": 11.336859044144957,
+          "mauve_1024": 0.006489813287643014
+        },
+        "ws": {
+          "gen_ppl": 264.4037944862296,
+          "gen_ppl_seqmean": 395.39759540191875,
+          "unigram_entropy": 10.283874069156791,
+          "ref_gen_ppl": 19.499693767639172,
+          "ref_unigram_entropy": 10.433135066583553,
+          "mauve_1024": 0.009281713671072892
+        },
+        "ts": {
+          "gen_ppl": 143.8379565852703,
+          "gen_ppl_seqmean": 160.3408229355973,
+          "unigram_entropy": 8.766261592941534,
+          "ref_gen_ppl": 7.175437437909364,
+          "ref_unigram_entropy": 8.66335053323845,
+          "mauve_1024": 0.004602754807571127
+        },
+        "1bw": {
+          "gen_ppl": 843.4980536808255,
+          "gen_ppl_seqmean": 1697.799697656717,
+          "unigram_entropy": 10.233984873585293,
+          "ref_gen_ppl": 45.05917759975559,
+          "ref_unigram_entropy": 10.063046210828563,
+          "mauve_1024": 0.005930759655782995
+        }
+      }
     },
     {
       "tokens_B": 6.4,
@@ -48,7 +116,41 @@
       },
       "test_seg_bits": 4.131,
       "test_coarse_q1_32": 4.14,
-      "test_fine_q128_1024": 3.798
+      "test_fine_q128_1024": 3.798,
+      "extra": {
+        "wiki": {
+          "gen_ppl": 309.5084396140765,
+          "gen_ppl_seqmean": 394.8484257876533,
+          "unigram_entropy": 11.119372314458106,
+          "ref_gen_ppl": 19.97647541005174,
+          "ref_unigram_entropy": 11.336859044144957,
+          "mauve_1024": 0.009082150291898336
+        },
+        "ws": {
+          "gen_ppl": 259.9664871160329,
+          "gen_ppl_seqmean": 415.4339923207524,
+          "unigram_entropy": 10.45383190714846,
+          "ref_gen_ppl": 19.499693767639172,
+          "ref_unigram_entropy": 10.433135066583553,
+          "mauve_1024": 0.008898795954373812
+        },
+        "ts": {
+          "gen_ppl": 130.53077637505194,
+          "gen_ppl_seqmean": 147.48344833919626,
+          "unigram_entropy": 8.782997270680408,
+          "ref_gen_ppl": 7.175437437909364,
+          "ref_unigram_entropy": 8.66335053323845,
+          "mauve_1024": 0.005032022426916156
+        },
+        "1bw": {
+          "gen_ppl": 806.3714353626365,
+          "gen_ppl_seqmean": 1621.1486109873483,
+          "unigram_entropy": 10.37295160009547,
+          "ref_gen_ppl": 45.05917759975559,
+          "ref_unigram_entropy": 10.063046210828563,
+          "mauve_1024": 0.0077019005370924255
+        }
+      }
     },
     {
       "tokens_B": 12.8,
@@ -66,7 +168,41 @@
       },
       "test_seg_bits": 3.948,
       "test_coarse_q1_32": 4.126,
-      "test_fine_q128_1024": 3.342
+      "test_fine_q128_1024": 3.342,
+      "extra": {
+        "wiki": {
+          "gen_ppl": 253.86767736983975,
+          "gen_ppl_seqmean": 311.50737004702546,
+          "unigram_entropy": 11.09914581141458,
+          "ref_gen_ppl": 19.97647541005174,
+          "ref_unigram_entropy": 11.336859044144957,
+          "mauve_1024": 0.008786231440680959
+        },
+        "ws": {
+          "gen_ppl": 236.27804277654823,
+          "gen_ppl_seqmean": 372.65156928143745,
+          "unigram_entropy": 10.483381264113977,
+          "ref_gen_ppl": 19.499693767639172,
+          "ref_unigram_entropy": 10.433135066583553,
+          "mauve_1024": 0.008661763607650152
+        },
+        "ts": {
+          "gen_ppl": 120.1093708919768,
+          "gen_ppl_seqmean": 136.85037126242707,
+          "unigram_entropy": 8.83966288369046,
+          "ref_gen_ppl": 7.175437437909364,
+          "ref_unigram_entropy": 8.66335053323845,
+          "mauve_1024": 0.00470043116130213
+        },
+        "1bw": {
+          "gen_ppl": 685.2592983586965,
+          "gen_ppl_seqmean": 1308.1074195233527,
+          "unigram_entropy": 10.331131212620573,
+          "ref_gen_ppl": 45.05917759975559,
+          "ref_unigram_entropy": 10.063046210828563,
+          "mauve_1024": 0.006172498579379711
+        }
+      }
     },
     {
       "tokens_B": 25.6,
@@ -84,7 +220,41 @@
       },
       "test_seg_bits": 3.741,
       "test_coarse_q1_32": 4.112,
-      "test_fine_q128_1024": 2.827
+      "test_fine_q128_1024": 2.827,
+      "extra": {
+        "wiki": {
+          "gen_ppl": 232.74409397716144,
+          "gen_ppl_seqmean": 278.2399861766341,
+          "unigram_entropy": 11.178579313217986,
+          "ref_gen_ppl": 19.97647541005174,
+          "ref_unigram_entropy": 11.336859044144957,
+          "mauve_1024": 0.009961953501055568
+        },
+        "ws": {
+          "gen_ppl": 216.4367683672503,
+          "gen_ppl_seqmean": 320.6928935654625,
+          "unigram_entropy": 10.539978023979211,
+          "ref_gen_ppl": 19.499693767639172,
+          "ref_unigram_entropy": 10.433135066583553,
+          "mauve_1024": 0.00805082344367947
+        },
+        "ts": {
+          "gen_ppl": 108.57716564277165,
+          "gen_ppl_seqmean": 121.47387576118128,
+          "unigram_entropy": 8.884286373076197,
+          "ref_gen_ppl": 7.175437437909364,
+          "ref_unigram_entropy": 8.66335053323845,
+          "mauve_1024": 0.005085757527941971
+        },
+        "1bw": {
+          "gen_ppl": 610.8905885287361,
+          "gen_ppl_seqmean": 1257.9216126096662,
+          "unigram_entropy": 10.347681740115588,
+          "ref_gen_ppl": 45.05917759975559,
+          "ref_unigram_entropy": 10.063046210828563,
+          "mauve_1024": 0.007445926031337791
+        }
+      }
     },
     {
       "tokens_B": 51.2,
@@ -102,7 +272,41 @@
       },
       "test_seg_bits": 3.581,
       "test_coarse_q1_32": 4.061,
-      "test_fine_q128_1024": 2.549
+      "test_fine_q128_1024": 2.549,
+      "extra": {
+        "wiki": {
+          "gen_ppl": 228.5754736287702,
+          "gen_ppl_seqmean": 276.4703327171661,
+          "unigram_entropy": 11.208375133000967,
+          "ref_gen_ppl": 19.97647541005174,
+          "ref_unigram_entropy": 11.336859044144957,
+          "mauve_1024": 0.007661848569206251
+        },
+        "ws": {
+          "gen_ppl": 217.86710975417512,
+          "gen_ppl_seqmean": 320.7937978037366,
+          "unigram_entropy": 10.540830311762093,
+          "ref_gen_ppl": 19.499693767639172,
+          "ref_unigram_entropy": 10.433135066583553,
+          "mauve_1024": 0.008652525126987045
+        },
+        "ts": {
+          "gen_ppl": 102.3245789934592,
+          "gen_ppl_seqmean": 115.48625338459061,
+          "unigram_entropy": 8.808196420274756,
+          "ref_gen_ppl": 7.175437437909364,
+          "ref_unigram_entropy": 8.66335053323845,
+          "mauve_1024": 0.0055173549242387215
+        },
+        "1bw": {
+          "gen_ppl": 626.245618805588,
+          "gen_ppl_seqmean": 1169.859649340102,
+          "unigram_entropy": 10.400111685032787,
+          "ref_gen_ppl": 45.05917759975559,
+          "ref_unigram_entropy": 10.063046210828563,
+          "mauve_1024": 0.005279119747056915
+        }
+      }
     },
     {
       "tokens_B": 102.4,
@@ -119,7 +323,41 @@
       },
       "test_seg_bits": 3.554,
       "test_coarse_q1_32": 4.068,
-      "test_fine_q128_1024": 2.474
+      "test_fine_q128_1024": 2.474,
+      "extra": {
+        "wiki": {
+          "gen_ppl": 201.15534571510193,
+          "gen_ppl_seqmean": 242.64029081296587,
+          "unigram_entropy": 11.21893324508498,
+          "ref_gen_ppl": 19.97647541005174,
+          "ref_unigram_entropy": 11.336859044144957,
+          "mauve_1024": 0.00933295343570164
+        },
+        "ws": {
+          "gen_ppl": 194.63090921574803,
+          "gen_ppl_seqmean": 286.6451668222406,
+          "unigram_entropy": 10.497465355354853,
+          "ref_gen_ppl": 19.499693767639172,
+          "ref_unigram_entropy": 10.433135066583553,
+          "mauve_1024": 0.011081336403796932
+        },
+        "ts": {
+          "gen_ppl": 96.54881645696328,
+          "gen_ppl_seqmean": 108.8471027089759,
+          "unigram_entropy": 8.818182362200659,
+          "ref_gen_ppl": 7.175437437909364,
+          "ref_unigram_entropy": 8.66335053323845,
+          "mauve_1024": 0.0058117448402347045
+        },
+        "1bw": {
+          "gen_ppl": 595.873081409314,
+          "gen_ppl_seqmean": 1257.4276221174464,
+          "unigram_entropy": 10.407266228329933,
+          "ref_gen_ppl": 45.05917759975559,
+          "ref_unigram_entropy": 10.063046210828563,
+          "mauve_1024": 0.006678200198771406
+        }
+      }
     },
     {
       "tokens_B": 204.8,
@@ -138,7 +376,41 @@
       "note": "16 epoch: total val plateau since 100B; coarse REBOUNDS 4.567->4.631 (held-out overfit) while fine still drops 4.220->4.143 — repeated-data saturation knee.",
       "test_seg_bits": 3.434,
       "test_coarse_q1_32": 4.009,
-      "test_fine_q128_1024": 2.316
+      "test_fine_q128_1024": 2.316,
+      "extra": {
+        "wiki": {
+          "gen_ppl": 186.32567963690164,
+          "gen_ppl_seqmean": 219.33830989361627,
+          "unigram_entropy": 11.203143444496265,
+          "ref_gen_ppl": 19.97647541005174,
+          "ref_unigram_entropy": 11.336859044144957,
+          "mauve_1024": 0.00990834168969808
+        },
+        "ws": {
+          "gen_ppl": 180.27837714951139,
+          "gen_ppl_seqmean": 257.0562319748782,
+          "unigram_entropy": 10.49874480989625,
+          "ref_gen_ppl": 19.499693767639172,
+          "ref_unigram_entropy": 10.433135066583553,
+          "mauve_1024": 0.011492156984603083
+        },
+        "ts": {
+          "gen_ppl": 94.55383447028036,
+          "gen_ppl_seqmean": 105.72312955408852,
+          "unigram_entropy": 8.79810821698336,
+          "ref_gen_ppl": 7.175437437909364,
+          "ref_unigram_entropy": 8.66335053323845,
+          "mauve_1024": 0.005270867974433121
+        },
+        "1bw": {
+          "gen_ppl": 550.9925876023,
+          "gen_ppl_seqmean": 1182.7112661928493,
+          "unigram_entropy": 10.384095999696886,
+          "ref_gen_ppl": 45.05917759975559,
+          "ref_unigram_entropy": 10.063046210828563,
+          "mauve_1024": 0.005143478520054218
+        }
+      }
     }
   ],
   "pending": [

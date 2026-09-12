@@ -90,10 +90,25 @@ C = panel(2 * W, "C. gen quality (wiki)", "score",
           [("R1 (/100)", [t for t, _ in gq], [g[0] / 100 for _, g in gq]),
            ("MAUVE", [t for t, _ in gq], [g[1] for _, g in gq])],
           0.0, 0.35, [0.1, 0.2, 0.3])
+# panel D: judge Gen-PPL (log10) across 4 benchmarks — the deterministic
+# fluency axis; monotone down = no repeated-data overfitting knee.
+pp = [p for p in pts if p.get("extra")]
+
+
+def ppl_series(short):
+    return ([p["tokens_B"] for p in pp],
+            [math.log10(p["extra"][short]["gen_ppl"]) for p in pp])
+
+
+D = panel(3 * W, "D. judge Gen-PPL (log)", "log10 PPL",
+          [("wiki", *ppl_series("wiki")),
+           ("ws", *ppl_series("ws")),
+           ("ts", *ppl_series("ts"))],
+          1.8, 3.0, [2.0, 2.3, 2.5, 2.7, 3.0])
 
 svg = ['<svg xmlns="http://www.w3.org/2000/svg" '
-       f'width="{3*W}" height="{H}" font-family="Helvetica,Arial">']
-svg += A + B + C + ["</svg>"]
+       f'width="{4*W}" height="{H}" font-family="Helvetica,Arial">']
+svg += A + B + C + D + ["</svg>"]
 out = Path("docs/figures/data_scaling.svg")
 out.write_text("\n".join(svg))
-print(f"wrote {out}  ({len(tv)} loss pts, {len(gq)} gen pts)")
+print(f"wrote {out}  ({len(tv)} loss pts, {len(gq)} gen pts, {len(pp)} ppl pts)")
